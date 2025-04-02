@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Usuario {
+  id              Int             @id @default(autoincrement())
+  nome            String
+  email           String          @unique
+  senha           String
+  jornadaTrabalho DateTime
+  statusSenha     Boolean         @default(true)
+  perfilId        Int
+  perfil          Perfil          @relation(fields: [perfilId], references: [id])
+  historicos      Historico[]
+  diasUteis       DiasUteis[]
+  setores         UsuarioSetor[]  // nova relação
+}
+
+model Setor {
+  id        Int     @id @default(autoincrement())
+  nome      String  @unique // <-- adicione aqui
+  descricao String?
+  tipo      String
+  itens       Item[]
+  historicos  Historico[]
+  diasUteis   DiasUteis[]
+  usuarios    UsuarioSetor[]  // nova relação
+}
+
+model UsuarioSetor {
+  id         Int     @id @default(autoincrement())
+  usuario    Usuario @relation(fields: [usuarioId], references: [id])
+  usuarioId  Int
+  setor      Setor   @relation(fields: [setorId], references: [id])
+  setorId    Int
+
+  @@unique([usuarioId, setorId])
+}
+
+model Perfil {
+  id       Int      @id @default(autoincrement())
+  nome     String   @unique // <--- adicione isso
+  detalhes String?
+  tipo     String
+  usuarios Usuario[]
+}
+
+model Item {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  detalhes    String?
+  setorId     Int
+  setor       Setor    @relation(fields: [setorId], references: [id])
+  ano         Int
+  mes         String
+  valorFieam  Float
+  valorSesi   Float
+  valorSenai  Float
+  valorIel    Float
+  historicos  Historico[]
+
+  @@map("item")
+}
+
+model Historico {
+  id             Int      @id @default(autoincrement())
+  usuarioId      Int
+  itemId         Int
+  setorId        Int
+  ano            Int
+  mes            String
+  valorFieam     Float
+  valorSesi      Float
+  valorSenai     Float
+  valorIel       Float
+  totalGeral     Float
+  dataAlteracao  DateTime @default(now())
+
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+  item      Item    @relation(fields: [itemId], references: [id])
+  setor     Setor   @relation(fields: [setorId], references: [id])
+}
+
+model DiasUteis {
+  id              Int      @id @default(autoincrement())
+  setorId         Int
+  mes             String
+  ano             Int
+  diasUteis       Int
+  colaboradorId   Int
+  horasJornada    DateTime
+  feriasAbonoExtra Float
+  periodo         String
+
+  setor        Setor   @relation(fields: [setorId], references: [id])
+  colaborador  Usuario @relation(fields: [colaboradorId], references: [id])
+}
