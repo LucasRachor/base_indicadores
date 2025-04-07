@@ -1,11 +1,7 @@
-
 import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Paper } from '@mui/material';
 import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
-
-
-
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -15,20 +11,34 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErro('');
     console.log('Enviando login:', { email, senha });
-  
+
+   
+
     try {
-      const response = await api.post('/auth/login', { email, senha });
+      const response = await api.post('/auth/login', {
+        username: email,
+        password: senha
+      });
+
       const { token, usuario } = response.data;
       console.log('Login OK:', usuario);
+
+      // Salvar dados no localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('usuario', JSON.stringify(usuario));
+      localStorage.setItem('email', email);
+      localStorage.setItem('senha', senha); // ⚠️ Só em ambiente controlado!
+
       alert('Login realizado com sucesso!');
-      localStorage.setItem('perfil', usuario.perfil);
+
+      // Redireciona para o menu
       navigate('/menu');
+
     } catch (error) {
       console.error('Erro ao logar:', error);
-      setErro(error.response?.data?.erro || 'Erro no login');
+      setErro(error.response?.data?.message || 'Erro ao tentar login');
     }
   };
 

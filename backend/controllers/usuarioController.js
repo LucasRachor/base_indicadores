@@ -17,7 +17,8 @@ const listar = async (req, res) => {
       email: u.email,
       statusSenha: u.statusSenha,
       perfilId: u.perfilId,
-      jornadaTrabalho: u.jornadaTrabalho.toISOString().slice(11, 16), // exibe como "08:00"
+      perfil: u.perfil?.nome, 
+      jornadaTrabalho: u.jornadaTrabalho.toISOString().slice(11, 16),
       setorIds: u.setores.map((s) => s.setorId)
     }));
 
