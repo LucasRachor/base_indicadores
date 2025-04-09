@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const prisma = require('../prisma/client');
 const ActiveDirectory = require('activedirectory2');
 
+// Configuração do LDAP
 const config = {
   url: 'ldap://fieam.com.br',
   baseDN: 'DC=fieam,DC=com,DC=br',
@@ -10,7 +11,7 @@ const config = {
 };
 const ad = new ActiveDirectory(config);
 
-// REGISTRO MANUAL (NÃO USADO PELO LDAP)
+// Registro manual (opcional)
 const register = async (req, res) => {
   const { nome, email, senha, perfilId, jornadaTrabalho } = req.body;
 
@@ -32,7 +33,7 @@ const register = async (req, res) => {
   }
 };
 
-// GERA NOVO TOKEN DE AUTENTICAÇÃO
+// Atualizar token
 const refreshToken = async (req, res) => {
   const { userId } = req.body;
 
@@ -41,7 +42,7 @@ const refreshToken = async (req, res) => {
       where: { id: Number(userId) },
       include: {
         perfil: true,
-        setores: { include: { setor: true } }
+        usuarioSetores: { include: { setor: true } }
       }
     });
 
@@ -49,10 +50,11 @@ const refreshToken = async (req, res) => {
       return res.status(404).json({ message: 'Usuário não encontrado' });
     }
 
-    const token = jwt.sign({
-      id: usuario.id,
-      perfilId: usuario.perfilId
-    }, process.env.JWT_SECRET, { expiresIn: '1d' });
+    const token = jwt.sign(
+      { id: usuario.id, perfilId: usuario.perfilId },
+      process.env.JWT_SECRET,
+      { expiresIn: '1d' }
+    );
 
     return res.json({
       token,
@@ -62,7 +64,7 @@ const refreshToken = async (req, res) => {
         email: usuario.email,
         perfil: usuario.perfil.tipo,
         statusSenha: usuario.statusSenha,
-        setorIds: usuario.setores.map(s => s.setorId)
+        setorIds: usuario.usuarioSetores.map(s => s.setorId)
       }
     });
   } catch (error) {
@@ -70,7 +72,7 @@ const refreshToken = async (req, res) => {
   }
 };
 
-// LOGIN COM LDAP E FALLBACK LOCAL
+// Login com LDAP ou fallback
 const login = async (req, res) => {
   const { username, password } = req.body;
 
@@ -87,7 +89,7 @@ const login = async (req, res) => {
           where: { email: username },
           include: {
             perfil: true,
-            setores: { include: { setor: true } }
+            usuarioSetores: { include: { setor: true } }
           }
         });
 
@@ -95,10 +97,11 @@ const login = async (req, res) => {
           return res.status(401).json({ message: 'Usuário ou senha inválidos' });
         }
 
-        const token = jwt.sign({
-          id: usuario.id,
-          perfilId: usuario.perfilId
-        }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        const token = jwt.sign(
+          { id: usuario.id, perfilId: usuario.perfilId },
+          process.env.JWT_SECRET,
+          { expiresIn: '1d' }
+        );
 
         return res.json({
           token,
@@ -108,11 +111,12 @@ const login = async (req, res) => {
             email: usuario.email,
             perfil: usuario.perfil.tipo,
             statusSenha: usuario.statusSenha,
-            setorIds: usuario.setores.map(s => s.setorId)
+            setorIds: usuario.usuarioSetores.map(s => s.setorId)
           }
         });
 
       } catch (error) {
+        console.error('Erro no login master:', error);
         return res.status(500).json({ message: 'Erro no login master', erro: error.message });
       }
 
@@ -120,31 +124,64 @@ const login = async (req, res) => {
       console.log('Usuário autenticado via LDAP');
 
       try {
+        // Busca usuário já existente
         let usuario = await prisma.usuario.findUnique({
           where: { email: username },
           include: {
             perfil: true,
-            setores: { include: { setor: true } }
+            usuarioSetores: { include: { setor: true } }
           }
         });
 
         if (!usuario) {
+          // Garante existência do perfil e setor padrão
+          await prisma.perfil.upsert({
+            where: { id: 1 },
+            update: {},
+            create: {
+              id: 1,
+              nome: 'Administrador',
+              tipo: 'admin',
+              detalhes: 'Perfil com acesso total'
+            }
+          });
+
+          await prisma.setor.upsert({
+            where: { id: 1 },
+            update: {},
+            create: {
+              id: 1,
+              nome: 'Setor Padrão',
+              descricao: 'Setor padrão para novos usuários',
+              tipo: 'Geral'
+            }
+          });
+
+          // Cria novo usuário autenticado
           usuario = await prisma.usuario.create({
             data: {
               nome: username,
               email: username,
               senha: password,
               statusSenha: true,
-              perfil: { connect: { id: 1 } }, // 👈 Aqui está a mudança: Administrador
-              jornadaTrabalho: new Date('1970-01-01T08:00:00Z')
+              jornadaTrabalho: new Date('1970-01-01T08:00:00Z'),
+              perfil: { connect: { id: 1 } },
+              usuarioSetores: {
+                create: [{ setor: { connect: { id: 1 } } }]
+              }
+            },
+            include: {
+              perfil: true,
+              usuarioSetores: true
             }
           });
         }
 
-        const token = jwt.sign({
-          id: usuario.id,
-          perfilId: usuario.perfilId
-        }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        const token = jwt.sign(
+          { id: usuario.id, perfilId: usuario.perfilId },
+          process.env.JWT_SECRET,
+          { expiresIn: '1d' }
+        );
 
         return res.json({
           token,
@@ -152,16 +189,18 @@ const login = async (req, res) => {
             id: usuario.id,
             nome: usuario.nome,
             email: usuario.email,
-            perfil: usuario.perfil?.tipo || 'Administrador',
+            perfil: usuario.perfil?.tipo || 'Usuário_Visualização',
             statusSenha: usuario.statusSenha,
-            setorIds: usuario.setores.map(s => s.setorId)
+            setorIds: usuario.usuarioSetores.map(s => s.setorId)
           }
         });
+
       } catch (error) {
+        console.error('Erro no login LDAP:', error);
         return res.status(500).json({ message: 'Erro no login LDAP', erro: error.message });
       }
     }
   });
 };
 
-module.exports = { login, register };
+module.exports = { login, register, refreshToken };
