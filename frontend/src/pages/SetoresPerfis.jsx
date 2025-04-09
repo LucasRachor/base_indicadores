@@ -18,6 +18,8 @@ const SetoresPerfis = () => {
   const token = localStorage.getItem('token');
 
   const fetchData = async () => {
+    if (!token) return;
+
     try {
       const [resSetores, resPerfis] = await Promise.all([
         api.get('/setores', { headers: { Authorization: `Bearer ${token}` } }),
@@ -27,10 +29,16 @@ const SetoresPerfis = () => {
       setPerfis(resPerfis.data);
     } catch (err) {
       console.error('Erro ao buscar dados:', err);
+      alert('Erro ao buscar dados. Verifique se está autenticado.');
     }
   };
 
   const handleSave = async () => {
+    if (!token) {
+      alert('Sessão expirada. Faça login novamente.');
+      return;
+    }
+
     const endpoint = tipo === 'setor' ? '/setores' : '/perfis';
     const payload = tipo === 'perfil'
       ? { nome: form.nome, detalhes: form.descricao, tipo: form.tipo }
@@ -53,6 +61,7 @@ const SetoresPerfis = () => {
       fetchData();
     } catch (err) {
       console.error('Erro ao salvar:', err);
+      alert('Erro ao salvar. Verifique se está autenticado.');
     }
   };
 
@@ -64,14 +73,23 @@ const SetoresPerfis = () => {
   };
 
   const handleDelete = async () => {
+    if (!token) {
+      alert('Sessão expirada. Faça login novamente.');
+      return;
+    }
+
     const { id, tipo } = confirmDelete;
     const endpoint = tipo === 'setor' ? '/setores' : '/perfis';
+
     try {
-      await api.delete(`${endpoint}/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await api.delete(`${endpoint}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       setConfirmDelete({ open: false, tipo: '', id: null });
       fetchData();
     } catch (err) {
       console.error('Erro ao excluir:', err);
+      alert('Erro ao excluir. Verifique se está autenticado.');
     }
   };
 

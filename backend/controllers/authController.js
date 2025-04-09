@@ -10,8 +10,7 @@ const config = {
 };
 const ad = new ActiveDirectory(config);
 
-
-
+// REGISTRO MANUAL (NÃO USADO PELO LDAP)
 const register = async (req, res) => {
   const { nome, email, senha, perfilId, jornadaTrabalho } = req.body;
 
@@ -20,7 +19,7 @@ const register = async (req, res) => {
       data: {
         nome,
         email,
-        senha, 
+        senha,
         statusSenha: true,
         jornadaTrabalho: new Date(`1970-01-01T${jornadaTrabalho}`),
         perfil: { connect: { id: perfilId } }
@@ -33,7 +32,7 @@ const register = async (req, res) => {
   }
 };
 
-
+// GERA NOVO TOKEN DE AUTENTICAÇÃO
 const refreshToken = async (req, res) => {
   const { userId } = req.body;
 
@@ -71,19 +70,13 @@ const refreshToken = async (req, res) => {
   }
 };
 
-
-
-
+// LOGIN COM LDAP E FALLBACK LOCAL
 const login = async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
     return res.status(400).json({ message: 'Usuário e senha são obrigatórios' });
   }
-
-  
-  
-
 
   ad.authenticate(username, password, async (err, auth) => {
     if (err || !auth) {
@@ -142,7 +135,7 @@ const login = async (req, res) => {
               email: username,
               senha: password,
               statusSenha: true,
-              perfil: { connect: { id: 4 } }, // Usuário_Visualização por padrão
+              perfil: { connect: { id: 1 } }, // 👈 Aqui está a mudança: Administrador
               jornadaTrabalho: new Date('1970-01-01T08:00:00Z')
             }
           });
@@ -159,9 +152,9 @@ const login = async (req, res) => {
             id: usuario.id,
             nome: usuario.nome,
             email: usuario.email,
-            perfil: usuario.perfil?.tipo || 'Usuário_Visualização',
+            perfil: usuario.perfil?.tipo || 'Administrador',
             statusSenha: usuario.statusSenha,
-            setorIds: []
+            setorIds: usuario.setores.map(s => s.setorId)
           }
         });
       } catch (error) {

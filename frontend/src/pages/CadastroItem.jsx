@@ -1,34 +1,30 @@
-
 import React, { useState, useEffect } from 'react';
 import {
-  Box, Typography, TextField, Button, MenuItem, Grid, Paper
+  Box, Typography, TextField, Button, MenuItem, Grid, Paper, Chip, IconButton, Table, TableHead, TableRow, TableCell, TableBody
 } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import api from '../services/api';
 
 const CadastroItem = () => {
   const [setores, setSetores] = useState([]);
+  const [itens, setItens] = useState([]);
+  const [instituicoes, setInstituicoes] = useState(['FIEAM', 'SESI', 'SENAI', 'IEL']);
+  const [novaInstituicao, setNovaInstituicao] = useState('');
+  const [editandoId, setEditandoId] = useState(null);
+
   const [form, setForm] = useState({
     nome: '',
     detalhes: '',
     setorId: '',
-    ano: new Date().getFullYear(),
-    mes: '',
-    valorFieam: '',
-    valorSesi: '',
-    valorSenai: '',
-    valorIel: '',
-    totalGeral: 0
+    ano: new Date().getFullYear()
   });
 
-  const meses = [
-    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-  ];
-
-  const anos = [2025, 2024, 2023, 2022, 2021];
-
+  const currentYear = new Date().getFullYear();
+  const anos = Array.from({ length: 21 }, (_, i) => currentYear - 10 + i);
   const token = localStorage.getItem('token');
 
+  // Carregar setores e itens
   useEffect(() => {
     const fetchSetores = async () => {
       try {
@@ -40,38 +36,100 @@ const CadastroItem = () => {
         console.error('Erro ao carregar setores', err);
       }
     };
-    fetchSetores();
-  }, [token]);
 
-  useEffect(() => {
-    const fieam = parseFloat(form.valorFieam) || 0;
-    const sesi = parseFloat(form.valorSesi) || 0;
-    const senai = parseFloat(form.valorSenai) || 0;
-    const iel = parseFloat(form.valorIel) || 0;
-    setForm((prev) => ({ ...prev, totalGeral: fieam + sesi + senai + iel }));
-  }, [form.valorFieam, form.valorSesi, form.valorSenai, form.valorIel]);
+    const fetchItens = async () => {
+      try {
+        const res = await api.get('/itens', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setItens(res.data);
+      } catch (err) {
+        console.error('Erro ao carregar itens', err);
+      }
+    };
+
+    fetchSetores();
+    fetchItens();
+  }, [token]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
+  const adicionarInstituicao = () => {
+    const nova = novaInstituicao.trim().toUpperCase();
+    if (nova !== '' && !instituicoes.includes(nova)) {
+      setInstituicoes([...instituicoes, nova]);
+      setNovaInstituicao('');
+    }
+  };
+
+  const removerInstituicao = (nome) => {
+    setInstituicoes(instituicoes.filter(inst => inst !== nome));
+  };
+
+  const limparFormulario = () => {
+    setForm({ nome: '', detalhes: '', setorId: '', ano: currentYear });
+    setInstituicoes(['FIEAM', 'SESI', 'SENAI', 'IEL']);
+    setEditandoId(null);
+  };
+
   const handleSubmit = async () => {
     try {
-      await api.post('/itens', form, {
+      const payload = { ...form, instituicoes };
+
+      if (editandoId) {
+        await api.put(`/itens/${editandoId}`, payload, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        alert('Item atualizado com sucesso!');
+      } else {
+        await api.post('/itens', payload, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        alert('Item cadastrado com sucesso!');
+      }
+
+      limparFormulario();
+
+      const res = await api.get('/itens', {
         headers: { Authorization: `Bearer ${token}` }
       });
-      alert('Item cadastrado com sucesso!');
-      setForm({ nome: '', detalhes: '', setorId: '', ano: new Date().getFullYear(), mes: '', valorFieam: '', valorSesi: '', valorSenai: '', valorIel: '', totalGeral: 0 });
+      setItens(res.data);
     } catch (error) {
-      console.error('Erro ao cadastrar item:', error);
+      console.error('Erro ao salvar item:', error);
+    }
+  };
+
+  const handleEditar = async (item) => {
+    setForm({
+      nome: item.nome,
+      detalhes: item.detalhes,
+      setorId: item.setor_id,
+      ano: item.ano
+    });
+    setEditandoId(item.id);
+  };
+
+  const handleExcluir = async (id) => {
+    try {
+      await api.delete(`/itens/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      alert('Item excluído com sucesso!');
+      setItens(itens.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error('Erro ao excluir item:', error);
     }
   };
 
   return (
     <Box p={3}>
-      <Paper sx={{ p: 4 }}>
-        <Typography variant="h5" mb={2}>Cadastro de Item</Typography>
+      <Paper sx={{ p: 4, mb: 4 }}>
+        <Typography variant="h5" mb={2}>
+          {editandoId ? 'Editar Item' : 'Cadastro de Item'}
+        </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField label="Nome do Item" name="nome" fullWidth value={form.nome} onChange={handleChange} />
@@ -86,39 +144,73 @@ const CadastroItem = () => {
               ))}
             </TextField>
           </Grid>
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={12} sm={6}>
             <TextField select label="Ano" name="ano" fullWidth value={form.ano} onChange={handleChange}>
               {anos.map((ano) => (
                 <MenuItem key={ano} value={ano}>{ano}</MenuItem>
               ))}
             </TextField>
           </Grid>
-          <Grid item xs={6} sm={3}>
-            <TextField select label="Mês" name="mes" fullWidth value={form.mes} onChange={handleChange}>
-              {meses.map((mes) => (
-                <MenuItem key={mes} value={mes}>{mes}</MenuItem>
+
+          {/* Cadastro de novas instituições */}
+          <Grid item xs={12} sm={8}>
+            <TextField label="Nova Instituição" value={novaInstituicao} onChange={(e) => setNovaInstituicao(e.target.value)} fullWidth />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Button variant="outlined" fullWidth sx={{ height: '100%' }} onClick={adicionarInstituicao}>
+              Adicionar Instituição
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="subtitle1" gutterBottom>Instituições Selecionadas:</Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              {instituicoes.map((inst) => (
+                <Chip key={inst} label={inst} onDelete={() => removerInstituicao(inst)} deleteIcon={<DeleteIcon />} />
               ))}
-            </TextField>
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <TextField label="Valor FIEAM" name="valorFieam" type="number" fullWidth value={form.valorFieam} onChange={handleChange} />
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <TextField label="Valor SESI" name="valorSesi" type="number" fullWidth value={form.valorSesi} onChange={handleChange} />
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <TextField label="Valor SENAI" name="valorSenai" type="number" fullWidth value={form.valorSenai} onChange={handleChange} />
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <TextField label="Valor IEL" name="valorIel" type="number" fullWidth value={form.valorIel} onChange={handleChange} />
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <TextField label="Total Geral" name="totalGeral" type="number" fullWidth value={form.totalGeral} disabled />
+            </Box>
           </Grid>
         </Grid>
+
         <Box mt={3}>
-          <Button variant="contained" onClick={handleSubmit}>Cadastrar</Button>
+          <Button variant="contained" onClick={handleSubmit}>
+            {editandoId ? 'Atualizar Item' : 'Cadastrar Item'}
+          </Button>
+          {editandoId && (
+            <Button onClick={limparFormulario} sx={{ ml: 2 }}>
+              Cancelar
+            </Button>
+          )}
         </Box>
+      </Paper>
+
+      {/* Tabela de Itens */}
+      <Paper sx={{ p: 2 }}>
+        <Typography variant="h6" gutterBottom>Itens Cadastrados</Typography>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Nome</TableCell>
+              <TableCell>Detalhes</TableCell>
+              <TableCell>Setor</TableCell>
+              <TableCell>Ano</TableCell>
+              <TableCell>Ações</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {itens.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.nome}</TableCell>
+                <TableCell>{item.detalhes}</TableCell>
+                <TableCell>{item.setor?.nome || item.setor_nome}</TableCell>
+                <TableCell>{item.ano}</TableCell>
+                <TableCell>
+                  <IconButton color="primary" onClick={() => handleEditar(item)}><EditIcon /></IconButton>
+                  <IconButton color="error" onClick={() => handleExcluir(item.id)}><DeleteIcon /></IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </Paper>
     </Box>
   );
