@@ -10,7 +10,8 @@ const config = {
 };
 const ad = new ActiveDirectory(config);
 
-// ------------------ REGISTER ------------------
+
+
 const register = async (req, res) => {
   const { nome, email, senha, perfilId, jornadaTrabalho } = req.body;
 
@@ -19,7 +20,7 @@ const register = async (req, res) => {
       data: {
         nome,
         email,
-        senha, // sem hash
+        senha, 
         statusSenha: true,
         jornadaTrabalho: new Date(`1970-01-01T${jornadaTrabalho}`),
         perfil: { connect: { id: perfilId } }
@@ -32,7 +33,47 @@ const register = async (req, res) => {
   }
 };
 
-// ------------------ LOGIN ------------------
+
+const refreshToken = async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const usuario = await prisma.usuario.findUnique({
+      where: { id: Number(userId) },
+      include: {
+        perfil: true,
+        setores: { include: { setor: true } }
+      }
+    });
+
+    if (!usuario) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+
+    const token = jwt.sign({
+      id: usuario.id,
+      perfilId: usuario.perfilId
+    }, process.env.JWT_SECRET, { expiresIn: '1d' });
+
+    return res.json({
+      token,
+      usuario: {
+        id: usuario.id,
+        nome: usuario.nome,
+        email: usuario.email,
+        perfil: usuario.perfil.tipo,
+        statusSenha: usuario.statusSenha,
+        setorIds: usuario.setores.map(s => s.setorId)
+      }
+    });
+  } catch (error) {
+    return res.status(500).json({ message: 'Erro ao gerar novo token', erro: error.message });
+  }
+};
+
+
+
+
 const login = async (req, res) => {
   const { username, password } = req.body;
 
@@ -40,7 +81,10 @@ const login = async (req, res) => {
     return res.status(400).json({ message: 'Usuário e senha são obrigatórios' });
   }
 
-  // 1º: tenta autenticar com LDAP
+  
+  
+
+
   ad.authenticate(username, password, async (err, auth) => {
     if (err || !auth) {
       console.warn('LDAP falhou, tentando fallback...');
@@ -83,7 +127,13 @@ const login = async (req, res) => {
       console.log('Usuário autenticado via LDAP');
 
       try {
-        let usuario = await prisma.usuario.findUnique({ where: { email: username } });
+        let usuario = await prisma.usuario.findUnique({
+          where: { email: username },
+          include: {
+            perfil: true,
+            setores: { include: { setor: true } }
+          }
+        });
 
         if (!usuario) {
           usuario = await prisma.usuario.create({

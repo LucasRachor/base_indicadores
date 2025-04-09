@@ -45,7 +45,7 @@ model UsuarioSetor {
 
 model Perfil {
   id       Int      @id @default(autoincrement())
-  nome     String   @unique // <--- adicione isso
+  nome     String   @unique // 
   detalhes String?
   tipo     String
   usuarios Usuario[]

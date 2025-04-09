@@ -1,15 +1,14 @@
-import ResponsiveAppBar from './ResponsiveAppBar';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
+import Menu from './Menu';
 
 const LayoutComBarra = () => {
   return (
-    <>
-      <ResponsiveAppBar />
-      <div style={{ padding: '5px' }}>
-        <Outlet />
-      </div>
-    </>
+    <Menu>
+      <Outlet />
+    </Menu>
   );
 };
 
 export default LayoutComBarra;
+

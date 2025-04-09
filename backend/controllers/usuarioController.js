@@ -1,7 +1,6 @@
 const prisma = require('../prisma/client');
-const bcrypt = require('bcrypt');
 
-// Listar usuários com setores e perfil
+
 const listar = async (req, res) => {
   try {
     const usuarios = await prisma.usuario.findMany({
@@ -58,7 +57,7 @@ const criar = async (req, res) => {
 };
 
 
-// Editar usuário e atualizar setores
+
 const editar = async (req, res) => {
   const { nome, email, senha, jornadaTrabalho, statusSenha, perfilId, setorIds } = req.body;
   const { id } = req.params;
@@ -66,10 +65,10 @@ const editar = async (req, res) => {
   try {
     const hash = senha ? await bcrypt.hash(senha, 10) : undefined;
 
-    // Remove setores antigos
+    
     await prisma.usuarioSetor.deleteMany({ where: { usuarioId: Number(id) } });
 
-    // Atualiza usuário e recria vínculo com setores
+   
     const atualizado = await prisma.usuario.update({
       where: { id: Number(id) },
       data: {
@@ -78,7 +77,7 @@ const editar = async (req, res) => {
         jornadaTrabalho: new Date(`1970-01-01T${jornadaTrabalho}`),
         statusSenha,
         perfil: { connect: { id: perfilId } },
-        ...(senha && { senha: hash, statusSenha: true }),
+        ...(senha && { senha, statusSenha: true }),
         setores: {
           create: setorIds.map((id) => ({
             setor: { connect: { id } }

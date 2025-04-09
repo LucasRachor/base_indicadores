@@ -29,11 +29,11 @@ const Login = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('usuario', JSON.stringify(usuario));
       localStorage.setItem('email', email);
-      localStorage.setItem('senha', senha); // ⚠️ Só em ambiente controlado!
+      localStorage.setItem('senha', senha); 
 
       alert('Login realizado com sucesso!');
 
-      // Redireciona para o menu
+ 
       navigate('/menu');
 
     } catch (error) {
