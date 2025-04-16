@@ -38,14 +38,20 @@ const cadastrarItem = async (req, res) => {
       }
     }
 
-    await prisma.valor_item.createMany({
+   /*  await prisma.valor_item.createMany({
+      data: registrosValorItem,
+    }); */
+
+    await prisma.valor_Item.createMany({
       data: registrosValorItem,
     });
 
     res.status(201).json({ message: 'Item e valores cadastrados com sucesso.' });
   } catch (error) {
     console.error('Erro ao cadastrar item:', error);
-    res.status(500).json({ error: 'Erro ao cadastrar item.' });
+   res.status(500).json({ error: error.message });
+    console.error('Erro ao cadastrar item:', error);
+
   }
 };
 
@@ -100,8 +106,7 @@ const excluirItem = async (req, res) => {
   try {
     const itemId = parseInt(req.params.id);
 
-    // Apagar registros de valor_item primeiro
-    await prisma.valor_item.deleteMany({
+    await prisma.valor_Item.deleteMany({
       where: { item_id: itemId },
     });
 
@@ -110,8 +115,9 @@ const excluirItem = async (req, res) => {
     });
 
     res.json({ message: 'Item e valores excluídos com sucesso.' });
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao excluir item.' });
+  }  catch (error) {
+    console.error('Erro ao excluir item:', error);
+    res.status(500).json({ error: error.message }); // <-- mostra erro real
   }
 };
 

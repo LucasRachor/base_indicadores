@@ -12,5 +12,6 @@ router.get('/', autenticar, usuarioController.listar);
 router.post('/', autenticar, verificarAdmin, usuarioController.criar);
 router.put('/:id', autenticar, verificarAdmin, usuarioController.editar);
 router.patch('/:id/reset-senha', autenticar, verificarAdmin, usuarioController.resetarSenha);
+router.delete('/:id', autenticar, usuarioController.excluir);
 
 module.exports = router;

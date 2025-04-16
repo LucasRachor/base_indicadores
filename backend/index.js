@@ -5,38 +5,59 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3010;
 
-const prisma = require('./prisma/client'); // ✅ precisa vir ANTES de usar o prisma
+const prisma = require('./prisma/client');
 
-// Importação das rotas
 const authRoutes = require('./routes/authRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const setorRoutes = require('./routes/setorRoutes');
 const perfilRoutes = require('./routes/perfilRoutes');
 const itensRouter = require('./routes/itens');
+const atualizarItemRoutes = require('./routes/atualizarItem');
+const jornadaRoutes = require('./routes/jornada');
 
-// Middlewares
-app.use(cors({
-  origin: '*',
-  credentials: true
-}));
+
+
+app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
 
-// Rotas
+app.use('/jornada', jornadaRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/setores', setorRoutes);
 app.use('/api/perfis', perfilRoutes);
 app.use('/api/itens', itensRouter);
+app.use('/api', atualizarItemRoutes);
 
 app.get('/', (req, res) => res.send('API Online'));
 
-// Inicializa o servidor
 app.listen(port, async () => {
   console.log(`Servidor rodando na porta ${port}`);
-  await criarUsuariosPadrao(); // ✅ executa após iniciar o servidor
+  await criarPerfisPadrao();
+  await criarUsuariosPadrao();
 });
 
-// Função para criar perfil + usuário master
+const criarPerfisPadrao = async () => {
+  try {
+    const perfis = [
+      { id: 1, nome: 'Administrador', tipo: 'Administrador', detalhes: 'Perfil com acesso total' },
+      { id: 2, nome: 'Editor', tipo: 'Usuario_Editor', detalhes: 'Pode editar informações' },
+      { id: 3, nome: 'Líder', tipo: 'Lideres', detalhes: 'Visualiza dados do setor' },
+      { id: 4, nome: 'Visualizador', tipo: 'Usuario_Visualizacao', detalhes: 'Acesso somente leitura' }
+    ];
+
+    for (const perfil of perfis) {
+      await prisma.perfil.upsert({
+        where: { id: perfil.id },
+        update: {},
+        create: perfil
+      });
+    }
+    console.log('Perfis padrão garantidos');
+  } catch (error) {
+    console.error('Erro ao criar perfis padrão:', error);
+  }
+};
+
 const criarUsuariosPadrao = async () => {
   try {
     const usuarioExistente = await prisma.usuario.findUnique({
@@ -46,19 +67,6 @@ const criarUsuariosPadrao = async () => {
     if (!usuarioExistente) {
       console.log('Criando usuário master...');
 
-      // Garante que o perfil exista
-      await prisma.perfil.upsert({
-        where: { id: 1 },
-        update: {},
-        create: {
-          id: 1,
-          nome: 'Administrador',
-          detalhes: 'Perfil com acesso total',
-          tipo: 'admin'
-        }
-      });
-
-      // Garante que o setor exista
       await prisma.setor.upsert({
         where: { id: 1 },
         update: {},
@@ -70,7 +78,6 @@ const criarUsuariosPadrao = async () => {
         }
       });
 
-      // Cria o usuário master
       await prisma.usuario.create({
         data: {
           nome: 'Usuário Master',

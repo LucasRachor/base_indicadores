@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box, Typography, Paper, Button, IconButton, Table, TableHead, TableBody,
-  TableRow, TableCell, Dialog, DialogTitle, DialogContent, DialogActions, TextField, MenuItem, Select, InputLabel, FormControl
+  TableRow, TableCell, Dialog, DialogTitle, DialogContent, DialogActions,
+  TextField, MenuItem, Select, InputLabel, FormControl, Snackbar, Alert
 } from '@mui/material';
-import { Edit, Refresh } from '@mui/icons-material';
+import { Edit, Refresh, Delete } from '@mui/icons-material';
 import api from '../services/api';
 
 const Usuarios = () => {
@@ -21,19 +22,21 @@ const Usuarios = () => {
     statusSenha: false
   });
   const [editingId, setEditingId] = useState(null);
+  const [notificacao, setNotificacao] = useState({ open: false, tipo: 'success', mensagem: '' });
+
+  const token = localStorage.getItem('token');
 
   const fetchUsuarios = async () => {
-    const token = localStorage.getItem('token');
     try {
       const res = await api.get('/usuarios', { headers: { Authorization: `Bearer ${token}` } });
       setUsuarios(res.data);
     } catch (error) {
       console.error('Erro ao buscar usuários:', error);
+      setNotificacao({ open: true, tipo: 'error', mensagem: 'Erro ao buscar usuários' });
     }
   };
 
   const fetchSetoresPerfis = async () => {
-    const token = localStorage.getItem('token');
     try {
       const [resSetores, resPerfis] = await Promise.all([
         api.get('/setores', { headers: { Authorization: `Bearer ${token}` } }),
@@ -43,33 +46,52 @@ const Usuarios = () => {
       setPerfis(resPerfis.data);
     } catch (error) {
       console.error('Erro ao buscar setores ou perfis:', error);
+      setNotificacao({ open: true, tipo: 'error', mensagem: 'Erro ao buscar setores ou perfis' });
     }
   };
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem('token');
     try {
       if (editingId) {
         await api.put(`/usuarios/${editingId}`, form, { headers: { Authorization: `Bearer ${token}` } });
+        setNotificacao({ open: true, tipo: 'success', mensagem: 'Usuário atualizado com sucesso!' });
       } else {
         await api.post('/usuarios', form, { headers: { Authorization: `Bearer ${token}` } });
+        setNotificacao({ open: true, tipo: 'success', mensagem: 'Usuário cadastrado com sucesso!' });
       }
+
       setOpenDialog(false);
       setForm({ nome: '', email: '', senha: '', setorIds: [], perfilId: '', jornadaTrabalho: '', statusSenha: false });
       setEditingId(null);
       fetchUsuarios();
     } catch (error) {
-      console.error('Erro ao salvar usuário:', error);
+      const msg = error.response?.data?.erro || 'Erro ao salvar usuário';
+      console.error(msg);
+      setNotificacao({ open: true, tipo: 'error', mensagem: msg });
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`/usuarios/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      setNotificacao({ open: true, tipo: 'success', mensagem: 'Usuário excluído com sucesso!' });
+      fetchUsuarios();
+    } catch (error) {
+      const msg = error.response?.data?.erro || 'Erro ao excluir usuário';
+      console.error(msg);
+      setNotificacao({ open: true, tipo: 'error', mensagem: msg });
     }
   };
 
   const handleResetSenha = async (id) => {
-    const token = localStorage.getItem('token');
     try {
       await api.patch(`/usuarios/${id}/reset-senha`, {}, { headers: { Authorization: `Bearer ${token}` } });
+      setNotificacao({ open: true, tipo: 'success', mensagem: 'Senha resetada com sucesso!' });
       fetchUsuarios();
     } catch (error) {
-      console.error('Erro ao resetar senha:', error);
+      const msg = error.response?.data?.erro || 'Erro ao resetar senha';
+      console.error(msg);
+      setNotificacao({ open: true, tipo: 'error', mensagem: msg });
     }
   };
 
@@ -115,6 +137,7 @@ const Usuarios = () => {
               <TableCell>
                 <IconButton onClick={() => handleEdit(u)}><Edit /></IconButton>
                 <IconButton onClick={() => handleResetSenha(u.id)}><Refresh /></IconButton>
+                <IconButton color="error" onClick={() => handleDelete(u.id)}><Delete /></IconButton>
               </TableCell>
             </TableRow>
           ))}
@@ -158,6 +181,17 @@ const Usuarios = () => {
           <Button onClick={handleSubmit} variant="contained">Salvar</Button>
         </DialogActions>
       </Dialog>
+
+      <Snackbar
+        open={notificacao.open}
+        autoHideDuration={5000}
+        onClose={() => setNotificacao({ ...notificacao, open: false })}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={() => setNotificacao({ ...notificacao, open: false })} severity={notificacao.tipo} variant="filled">
+          {notificacao.mensagem}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

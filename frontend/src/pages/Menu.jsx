@@ -1,29 +1,62 @@
 import React from 'react';
-import { Box, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, CssBaseline, Typography, Grid, Paper } from '@mui/material';
+import {
+  Box, Drawer, List, ListItemIcon, ListItemText, Toolbar, CssBaseline, Typography, Grid, Paper
+} from '@mui/material';
 import { Link as RouterLink, Outlet, useLocation } from 'react-router-dom';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import DomainIcon from '@mui/icons-material/Domain';
-import InventoryIcon from '@mui/icons-material/Inventory';
-import HistoryIcon from '@mui/icons-material/History';
-import UpdateIcon from '@mui/icons-material/Update';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import HomeIcon from '@mui/icons-material/Home';
+import {
+  PersonAdd as PersonAddIcon,
+  Domain as DomainIcon,
+  Inventory as InventoryIcon,
+  History as HistoryIcon,
+  Update as UpdateIcon,
+  CalendarMonth as CalendarMonthIcon,
+  Home as HomeIcon
+} from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import ResponsiveAppBar from './ResponsiveAppBar';
 
 const drawerWidth = 240;
-const MotionListItem = motion(ListItem);
+const MotionListItem = motion(Box);
 
 const setores = [
-  { nome: 'Comercial', url: 'https://www.fieam.com.br/indicadores/setor/Comercial' },
-  { nome: 'Call Center', url: 'https://www.fieam.com.br/indicadores/setor/CallCenter' },
-  { nome: 'Marketing', url: 'https://www.fieam.com.br/indicadores/setor/Marketing' },
-  { nome: 'Administração', url: 'https://www.fieam.com.br/indicadores/setor/Administracao' },
-  { nome: 'Mercado', url: 'https://www.fieam.com.br/indicadores/setor/Mercado' },
-  { nome: 'Design', url: 'https://www.fieam.com.br/indicadores/setor/Design' },
-  { nome: 'Redes Sociais', url: 'https://www.fieam.com.br/indicadores/setor/RedesSociais' },
-  { nome: 'Promoções', url: 'https://www.fieam.com.br/indicadores/setor/Promocoes' }
+  { nome: 'Comercial', rota: '/setor/Comercial' },
+  { nome: 'Call Center', rota: '/setor/CallCenter' },
+  { nome: 'Marketing', rota: '/setor/Marketing' },
+  { nome: 'Administração', rota: '/setor/Administracao' },
+  { nome: 'Mercado', rota: '/setor/Mercado' },
+  { nome: 'Design', rota: '/setor/Design' },
+  { nome: 'Redes Sociais', rota: '/setor/RedesSociais' },
+  { nome: 'Promoções', rota: '/setor/Promocoes' }
 ];
+
+
+const BotaoMenu = ({ to, icon, label, location }) => (
+  <MotionListItem
+    component={RouterLink}
+    to={to}
+    whileHover={{ scale: 1.05 }}
+    sx={{
+      display: 'flex',
+      alignItems: 'center',
+      py: 1.2,
+      px: 2,
+      mx: 1,
+      my: 1,
+      borderRadius: 2,
+      color: 'white',
+      textDecoration: 'none',
+      backgroundColor: location.pathname === to ? '#1565c0' : 'transparent',
+      boxShadow: location.pathname === to ? '0 2px 10px rgba(0,0,0,0.2)' : 'none',
+      transition: 'all 0.3s ease',
+      '&:hover': {
+        backgroundColor: '#1565c0',
+      }
+    }}
+  >
+    <ListItemIcon sx={{ color: 'white', minWidth: 36 }}>{icon}</ListItemIcon>
+    <ListItemText primary={label} primaryTypographyProps={{ fontWeight: 500 }} />
+  </MotionListItem>
+);
 
 const LayoutBase = () => {
   const location = useLocation();
@@ -31,9 +64,9 @@ const LayoutBase = () => {
   const perfil = usuario?.perfil;
 
   const isAdmin = perfil === 'Administrador';
-  const isLider = perfil === 'Líderes';
-  const isEditor = perfil === 'Usuário_Editor';
-  const isViewer = perfil === 'Usuário_Visualização';
+  const isLider = perfil === 'Lideres';
+  const isEditor = perfil === 'Usuario_Editor';
+  const isViewer = perfil === 'Usuario_Visualizacao';
 
   const isMenuPage = location.pathname === '/menu';
 
@@ -52,52 +85,36 @@ const LayoutBase = () => {
             boxSizing: 'border-box',
             backgroundColor: '#1976d2',
             color: 'white',
-            '& .MuiListItemText-primary': { color: 'white' }
+            pt: 1
           }
         }}
       >
         <Toolbar />
         <List>
-          <MotionListItem button component={RouterLink} to="/menu" whileHover={{ scale: 1.05 }}>
-            <ListItemIcon sx={{ color: 'white' }}><HomeIcon /></ListItemIcon>
-            <ListItemText primary="Menu Principal" />
-          </MotionListItem>
+          <BotaoMenu to="/menu" icon={<HomeIcon />} label="Menu Principal" location={location} />
 
           {isAdmin && (
-            <MotionListItem button component={RouterLink} to="/usuarios" whileHover={{ scale: 1.05 }}>
-              <ListItemIcon sx={{ color: 'white' }}><PersonAddIcon /></ListItemIcon>
-              <ListItemText primary="Cadastrar Usuário" />
-            </MotionListItem>
+            <BotaoMenu to="/usuarios" icon={<PersonAddIcon />} label="Cadastrar Usuário" location={location} />
           )}
+
           {(isAdmin || isEditor) && (
-            <MotionListItem button component={RouterLink} to="/setores" whileHover={{ scale: 1.05 }}>
-              <ListItemIcon sx={{ color: 'white' }}><DomainIcon /></ListItemIcon>
-              <ListItemText primary="Cadastrar Setor" />
-            </MotionListItem>
+            <BotaoMenu to="/setores" icon={<DomainIcon />} label="Cadastrar Setor" location={location} />
           )}
+
           {(isAdmin || isEditor) && (
-            <MotionListItem button component={RouterLink} to="/itens" whileHover={{ scale: 1.05 }}>
-              <ListItemIcon sx={{ color: 'white' }}><InventoryIcon /></ListItemIcon>
-              <ListItemText primary="Cadastrar Item" />
-            </MotionListItem>
+            <BotaoMenu to="/itens" icon={<InventoryIcon />} label="Cadastrar Item" location={location} />
           )}
-          {(isAdmin || isEditor || isLider || isViewer) && (
-            <MotionListItem button component={RouterLink} to="/historico" whileHover={{ scale: 1.05 }}>
-              <ListItemIcon sx={{ color: 'white' }}><HistoryIcon /></ListItemIcon>
-              <ListItemText primary="Histórico de Itens" />
-            </MotionListItem>
+
+          {(isAdmin || isEditor || isLider) && (
+            <BotaoMenu to="/historico" icon={<HistoryIcon />} label="Histórico de Itens" location={location} />
           )}
+
           {(isAdmin || isEditor) && (
-            <MotionListItem button component={RouterLink} to="/atualizar" whileHover={{ scale: 1.05 }}>
-              <ListItemIcon sx={{ color: 'white' }}><UpdateIcon /></ListItemIcon>
-              <ListItemText primary="Atualizar Itens" />
-            </MotionListItem>
+            <BotaoMenu to="/atualizar" icon={<UpdateIcon />} label="Atualizar Itens" location={location} />
           )}
-          {(isAdmin || isEditor || isLider || isViewer) && (
-            <MotionListItem button component={RouterLink} to="/dias-uteis" whileHover={{ scale: 1.05 }}>
-              <ListItemIcon sx={{ color: 'white' }}><CalendarMonthIcon /></ListItemIcon>
-              <ListItemText primary="Dias Úteis por Setor" />
-            </MotionListItem>
+
+          {(isAdmin || isEditor || isLider) && (
+            <BotaoMenu to="/dias-uteis" icon={<CalendarMonthIcon />} label="Dias Úteis por Setor" location={location} />
           )}
         </List>
       </Drawer>
@@ -114,31 +131,79 @@ const LayoutBase = () => {
           <Toolbar />
           {isMenuPage ? (
             <>
-              <Typography variant="h5" gutterBottom>Informações Gerais</Typography>
+                    <Typography
+              variant="h4"
+              gutterBottom
+              sx={{
+                textAlign: 'center',
+                fontWeight: 'bold',
+                color: '#1976d2' // Cor do botão e AppBar
+              }}
+            >
+              DIRETORIA CORPORATIVA DE MARKETING
+            </Typography>
+
+            <Typography
+              variant="h5"
+              gutterBottom
+              sx={{
+                textAlign: 'center',
+                fontWeight: 'bold',
+                color: '#1976d2' // Cor do botão e AppBar
+              }}
+            >
+              PAINEL DE INDICADORES
+            </Typography>
+
+
+              
+              <br></br>
               <Grid container spacing={3}>
-                {setores.map((setor) => (
-                  <Grid item xs={12} sm={6} md={3} key={setor.nome}>
-                    <motion.div whileHover={{ scale: 1.05 }}>
-                      <Paper
-                        component="a"
-                        href={setor.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        sx={{
-                          p: 2,
-                          textAlign: 'center',
-                          cursor: 'pointer',
-                          textDecoration: 'none',
-                          backgroundColor: '#e3f2fd',
-                          color: '#0d47a1'
-                        }}
-                      >
-                        <Typography variant="h6">{setor.nome}</Typography>
-                      </Paper>
-                    </motion.div>
-                  </Grid>
-                ))}
-              </Grid>
+  {setores.map((setor) => (
+    <Grid item xs={12} sm={6} md={3} key={setor.nome}>
+      <motion.div
+        whileHover={{ scale: 1.05, y: -5 }}
+        transition={{ duration: 0.3 }}
+        style={{ height: '100%' }}
+      >
+        <Paper
+           component={RouterLink}
+           to={setor.rota}
+        
+        
+          elevation={4}
+          sx={{
+            height: '100%',
+            p: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 3,
+            textDecoration: 'none',
+            background: 'linear-gradient(to bottom, #e3f2fd, #ffffff)',
+            color: '#0d47a1',
+            transition: 'all 0.3s ease-in-out',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            '&:hover': {
+              background: '#bbdefb',
+              boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
+              color: '#002171',
+            }
+          }}
+        >
+          <Typography variant="h6" fontWeight="bold" align="center">
+            {setor.nome}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" align="center" mt={1}>
+            Ver Indicadores
+          </Typography>
+        </Paper>
+      </motion.div>
+    </Grid>
+  ))}
+</Grid>
+
             </>
           ) : (
             <Outlet />

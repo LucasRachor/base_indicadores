@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import fieam from "../assets/fieam.png";
 
@@ -33,7 +34,14 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="fixed" sx={{ width: '100%', zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: "#19c1d2" }}> 
+    <AppBar
+      position="fixed"
+      sx={{
+        width: '100%',
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+        backgroundColor: "#19c1d2"
+      }}
+    >
       <Toolbar
         sx={{
           px: 4,
@@ -49,24 +57,50 @@ function ResponsiveAppBar() {
           </Button>
         </Box>
 
-        {/* Nome do usuário + logout */}
+        {/* Nome do usuário com botão dropdown */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Tooltip title="Abrir menu">
-            <Button onClick={handleOpenUserMenu} sx={{ color: 'white', fontWeight: 'bold' }}>
+          <Tooltip title="Opções do usuário">
+            <Button
+              onClick={handleOpenUserMenu}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                color: 'white',
+                fontWeight: 'bold',
+                textTransform: 'none',
+                borderRadius: 2,
+                px: 2,
+                py: 1,
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                },
+                border: '1px solid rgba(255,255,255,0.3)',
+              }}
+            >
               {nomeUsuario}
+              <ArrowDropDownIcon sx={{ color: 'white' }} />
             </Button>
           </Tooltip>
           <Menu
-            sx={{ mt: '45px' }}
             anchorEl={anchorElUser}
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            PaperProps={{
+              elevation: 3,
+              sx: {
+                mt: 1,
+                minWidth: 160,
+                borderRadius: 2
+              }
+            }}
           >
             <MenuItem onClick={handleLogout}>
               <LogoutIcon fontSize="small" sx={{ mr: 1 }} />
-              <Typography>Sair</Typography>
+              <Typography variant="body1">Sair</Typography>
             </MenuItem>
           </Menu>
         </Box>

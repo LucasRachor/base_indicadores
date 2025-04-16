@@ -4,7 +4,6 @@ const prisma = require('../prisma/client');
 const autenticar = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader?.split(' ')[1];
-
   if (!token) return res.status(401).json({ erro: 'Token não fornecido' });
 
   try {
@@ -19,6 +18,7 @@ const autenticar = async (req, res, next) => {
     req.usuario = usuario;
     next();
   } catch (error) {
+    console.error('Erro no middleware de autenticação:', error);
     res.status(401).json({ erro: 'Token inválido' });
   }
 };

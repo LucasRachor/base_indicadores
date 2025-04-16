@@ -4,6 +4,7 @@ import {
 } from '@mui/material';
 import api from '../services/api';
 
+
 const AtualizacaoItem = () => {
   const [setores, setSetores] = useState([]);
   const [itens, setItens] = useState([]);
@@ -59,11 +60,12 @@ const AtualizacaoItem = () => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
-
+ 
   const handleSubmit = async () => {
     try {
-      await api.put(`/itens/${form.itemId}`, form, {
+      await api.put(`/atualizar-item/${form.itemId}`, form, {
         headers: { Authorization: `Bearer ${token}` }
+    
       });
       alert('Item atualizado com sucesso');
     } catch (error) {
@@ -138,7 +140,7 @@ const AtualizacaoItem = () => {
           </Grid>
         </Grid>
         <Box mt={3}>
-          <Button variant="contained" onClick={handleSubmit}>Atualizar</Button>
+          <Button variant="contained" onClick={handleSubmit}>Cadastrar</Button>
         </Box>
       </Paper>
     </Box>

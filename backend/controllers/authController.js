@@ -124,7 +124,6 @@ const login = async (req, res) => {
       console.log('Usuário autenticado via LDAP');
 
       try {
-        // Busca usuário já existente
         let usuario = await prisma.usuario.findUnique({
           where: { email: username },
           include: {
@@ -134,17 +133,11 @@ const login = async (req, res) => {
         });
 
         if (!usuario) {
-          // Garante existência do perfil e setor padrão
-          await prisma.perfil.upsert({
-            where: { id: 1 },
-            update: {},
-            create: {
-              id: 1,
-              nome: 'Administrador',
-              tipo: 'admin',
-              detalhes: 'Perfil com acesso total'
-            }
-          });
+          const perfilVisualizador = await prisma.perfil.findUnique({ where: { id: 4 } });
+
+          if (!perfilVisualizador) {
+            throw new Error('Perfil Visualizador padrão não encontrado');
+          }
 
           await prisma.setor.upsert({
             where: { id: 1 },
@@ -157,7 +150,6 @@ const login = async (req, res) => {
             }
           });
 
-          // Cria novo usuário autenticado
           usuario = await prisma.usuario.create({
             data: {
               nome: username,
@@ -165,7 +157,7 @@ const login = async (req, res) => {
               senha: password,
               statusSenha: true,
               jornadaTrabalho: new Date('1970-01-01T08:00:00Z'),
-              perfil: { connect: { id: 1 } },
+              perfil: { connect: { id: 4 } },
               usuarioSetores: {
                 create: [{ setor: { connect: { id: 1 } } }]
               }
@@ -189,12 +181,11 @@ const login = async (req, res) => {
             id: usuario.id,
             nome: usuario.nome,
             email: usuario.email,
-            perfil: usuario.perfil?.tipo || 'Usuário_Visualização',
+            perfil: usuario.perfil?.tipo || 'Usuario_Visualizacao',
             statusSenha: usuario.statusSenha,
             setorIds: usuario.usuarioSetores.map(s => s.setorId)
           }
         });
-
       } catch (error) {
         console.error('Erro no login LDAP:', error);
         return res.status(500).json({ message: 'Erro no login LDAP', erro: error.message });

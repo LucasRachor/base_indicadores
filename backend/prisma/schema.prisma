@@ -49,7 +49,7 @@ model Historico {
 model Instituicao {
   id      Int          @id @default(autoincrement())
   nome    String       @unique
-  valores Valor_Item[]
+  valores valor_item[]
 }
 
 model Item {
@@ -59,7 +59,7 @@ model Item {
   setor_id  Int
   setor     Setor        @relation(fields: [setor_id], references: [id])
   ano       Int
-  valores   Valor_Item[]
+  valores   valor_item[]
   createdAt DateTime     @default(now())
   Historico Historico[]
 }
@@ -85,19 +85,20 @@ model Setor {
 }
 
 model Usuario {
-  id              Int            @id @default(autoincrement())
+  id              Int                    @id @default(autoincrement())
   nome            String
-  email           String         @unique
+  email           String                 @unique
   senha           String
   jornadaTrabalho DateTime
-  statusSenha     Boolean        @default(true)
+  statusSenha     Boolean                @default(true)
   perfilId        Int
   setorId         Int?
+  perfil          Perfil                 @relation(fields: [perfilId], references: [id])
+  setor           Setor?                 @relation(fields: [setorId], references: [id])
   diasUteis       DiasUteis[]
   historicos      Historico[]
-  perfil          Perfil         @relation(fields: [perfilId], references: [id])
-  setor           Setor?         @relation(fields: [setorId], references: [id])
   usuarioSetores  UsuarioSetor[]
+  jornadas        JornadaColaboradores[] // <- RELAÇÃO INVERTIDA ADICIONADA
 
   @@index([perfilId])
   @@index([setorId])
@@ -113,7 +114,7 @@ model UsuarioSetor {
   @@index([setorId])
 }
 
-model Valor_Item {
+model valor_item {
   id             Int      @id @default(autoincrement())
   item_id        Int
   instituicao_id Int
@@ -122,4 +123,19 @@ model Valor_Item {
 
   item        Item        @relation(fields: [item_id], references: [id])
   instituicao Instituicao @relation(fields: [instituicao_id], references: [id])
+}
+
+model JornadaColaboradores {
+  id            Int      @id @default(autoincrement())
+  colaborador   Usuario  @relation(fields: [colaboradorId], references: [id], onDelete: Cascade)
+  colaboradorId Int
+  ano           Int
+  mes           Int
+  dia           Int
+  valor         String   @default("08:00")
+  motivo        String?
+  criadoEm      DateTime @default(now())
+  atualizadoEm  DateTime @updatedAt
+
+  @@unique([colaboradorId, ano, mes, dia])
 }
