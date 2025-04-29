@@ -83,18 +83,13 @@ const Marketing: React.FC = () => {
       "Publicação nas redes sociais",
       "Resposta de comentários nas redes sociais",
     ];
-  
     const emailIndicators = [
-      
      "Contas Alcançadas",
       "Impressões",
       "Interações",
       "Taxa de engajamento",
       "Seguidores"
-    
     ];
-  
-  
     if (pagoIndicators.includes(indicator)) return "Midia ON e OFF";
     if (emailIndicators.includes(indicator)) return "Orgânico";
     return " ";
@@ -118,13 +113,14 @@ const Marketing: React.FC = () => {
   };
 
   return (
+
     <div>
             <div style={{ padding: "20px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <Typography variant="h4" gutterBottom>
                 Setor: Marketing
               </Typography>
-              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <div style={{display: "flex", justifyContent: "flex-end" }}>
                 <Tooltip title="Voltar para o menu principal">
                   <Button
                     variant="contained"
@@ -159,8 +155,8 @@ const Marketing: React.FC = () => {
         </Tabs>
       </Box>
       <Paper sx={{ marginTop: "20px" }}>
-        <TableContainer>
-          <Table>
+      <TableContainer>
+      <Table size="small" sx={{ width: "100%", tableLayout: "fixed" }}>
           <TableHead>
   <TableRow>
   <TableCell

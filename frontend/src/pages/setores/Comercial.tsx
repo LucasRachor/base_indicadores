@@ -182,9 +182,9 @@ const data2025 = [
 
         </Tabs>
       </Box>
-      <Paper sx={{ marginTop: "20px" }}>
-        <TableContainer>
-          <Table>
+      <Paper sx={{ marginTop: "20px", overflowX: "auto" }}>
+      <TableContainer sx={{ minWidth: "900px", width: "100%" }}>
+      <Table size="small" sx={{ width: "max-content", minWidth: "100%" }}>
           <TableHead>
   <TableRow>
 

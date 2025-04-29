@@ -181,7 +181,9 @@ const Administracao: React.FC = () => {
     acc[category].push(row);
     return acc;
   }, {});
+
   return (
+    
     <div style={{ padding: "20px" }}>
      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <Typography variant="h4" gutterBottom>
