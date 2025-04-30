@@ -1,20 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Paper,
-  Button,
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Tabs,
-  Tab,
-  Box,
-  Tooltip,
-} from "@mui/material";
+import {  Paper,  Button,  Typography,  Table,  TableBody,  TableCell,  TableContainer,  TableHead,  TableRow,  Tabs,  Tab,  Box,  Tooltip,} from "@mui/material";
 
 const Administracao: React.FC = () => {
   const navigate = useNavigate();

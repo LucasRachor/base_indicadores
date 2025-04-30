@@ -37,7 +37,7 @@ const ProtectedRoute = ({ children, perfisPermitidos }) => {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/indicadores">
       <Routes>
         {/* Login fora do layout */}
         <Route path="/" element={<Login />} />

@@ -14,11 +14,13 @@ import {
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import ResponsiveAppBar from './ResponsiveAppBar';
+import Sidebar from '../pages/setores/Sidebar';
 
 const drawerWidth = 240;
 const MotionListItem = motion(Box);
 
 const setores = [
+  { nome: 'Geral', rota: '/setor/Geral' },
   { nome: 'Comercial', rota: '/setor/Comercial' },
   { nome: 'Call Center', rota: '/setor/CallCenter' },
   { nome: 'Marketing', rota: '/setor/Marketing' },
@@ -119,7 +121,7 @@ const LayoutBase = () => {
         </List>
       </Drawer>
 
-      {/* Conteúdo principal */}
+     
       <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', width: '100%', height: '100vh', overflow: 'hidden' }}>
         <Box sx={{ flexShrink: 0, bgcolor: '#1976d2', px: 2 }}>
           <Box sx={{ backgroundColor: 'white', borderRadius: 2, px: 2, py: 1, display: 'inline-block', mt: 1, mb: 1 }}>
@@ -130,84 +132,146 @@ const LayoutBase = () => {
         <Box component="main" sx={{ flexGrow: 1, overflowY: 'auto', p: 3 }}>
           <Toolbar />
           {isMenuPage ? (
-            <>
-                    <Typography
-              variant="h4"
-              gutterBottom
-              sx={{
-                textAlign: 'center',
-                fontWeight: 'bold',
-                color: '#1976d2' // Cor do botão e AppBar
-              }}
-            >
-              DIRETORIA CORPORATIVA DE MARKETING
-            </Typography>
-
-            <Typography
-              variant="h5"
-              gutterBottom
-              sx={{
-                textAlign: 'center',
-                fontWeight: 'bold',
-                color: '#1976d2' // Cor do botão e AppBar
-              }}
-            >
-              PAINEL DE INDICADORES
-            </Typography>
-
-
-              
-              <br></br>
-              <Grid container spacing={3}>
-  {setores.map((setor) => (
-    <Grid item xs={12} sm={6} md={3} key={setor.nome}>
-      <motion.div
-        whileHover={{ scale: 1.05, y: -5 }}
-        transition={{ duration: 0.3 }}
-        style={{ height: '100%' }}
+  <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, flexWrap: 'wrap' }}>
+    <Box sx={{ flexGrow: 1 }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{ textAlign: 'center', fontWeight: 'bold', color: '#1976d2' }}
       >
-        <Paper
-           component={RouterLink}
-           to={setor.rota}
-        
-        
-          elevation={4}
-          sx={{
-            height: '100%',
-            p: 3,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 3,
-            textDecoration: 'none',
-            background: 'linear-gradient(to bottom, #e3f2fd, #ffffff)',
-            color: '#0d47a1',
-            transition: 'all 0.3s ease-in-out',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            '&:hover': {
-              background: '#bbdefb',
-              boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
-              color: '#002171',
-            }
-          }}
-        >
-          <Typography variant="h6" fontWeight="bold" align="center">
-            {setor.nome}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" align="center" mt={1}>
-            Ver Indicadores
-          </Typography>
-        </Paper>
-      </motion.div>
-    </Grid>
-  ))}
-</Grid>
+        DIRETORIA CORPORATIVA DE MARKETING
+      </Typography>
 
-            </>
-          ) : (
-            <Outlet />
-          )}
+      <Typography
+        variant="h5"
+        gutterBottom
+        sx={{ textAlign: 'center', fontWeight: 'bold', color: '#1976d2' }}
+      >
+        PAINEL DE INDICADORES
+      </Typography>
+
+      {/* Linha 1: Geral */}
+      <Grid container justifyContent="center" spacing={3} mb={3}>
+        <Grid item xs={12} sm={6} md={3}>
+          <motion.div whileHover={{ scale: 1.05, y: -5 }} transition={{ duration: 0.3 }} style={{ height: '100%' }}>
+            <Paper
+              component={RouterLink}
+              to="/setor/Geral"
+              elevation={4}
+              sx={{
+                height: '100%',
+                p: 3,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 3,
+                textDecoration: 'none',
+                background: 'linear-gradient(to bottom, #e3f2fd, #ffffff)',
+                color: '#0d47a1',
+                transition: 'all 0.3s ease-in-out',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                '&:hover': {
+                  background: '#bbdefb',
+                  boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
+                  color: '#002171',
+                }
+              }}
+            >
+              <Typography variant="h6" fontWeight="bold" align="center">Geral</Typography>
+              <Typography variant="body2" color="text.secondary" align="center" mt={1}>
+                Ver Indicadores
+              </Typography>
+            </Paper>
+          </motion.div>
+        </Grid>
+      </Grid>
+
+      {/* Linha 2 */}
+      <Grid container spacing={3} justifyContent="center" mb={3}>
+        {['Comercial', 'Call Center', 'Marketing', 'Administração'].map((nome) => (
+          <Grid item xs={12} sm={6} md={3} key={nome}>
+            <motion.div whileHover={{ scale: 1.05, y: -5 }} transition={{ duration: 0.3 }} style={{ height: '100%' }}>
+              <Paper
+                component={RouterLink}
+                to={`/setor/${nome.replace(' ', '')}`}
+                elevation={4}
+                sx={{
+                  height: '100%',
+                  p: 3,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 3,
+                  textDecoration: 'none',
+                  background: 'linear-gradient(to bottom, #e3f2fd, #ffffff)',
+                  color: '#0d47a1',
+                  transition: 'all 0.3s ease-in-out',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  '&:hover': {
+                    background: '#bbdefb',
+                    boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
+                    color: '#002171',
+                  }
+                }}
+              >
+                <Typography variant="h6" fontWeight="bold" align="center">{nome}</Typography>
+                <Typography variant="body2" color="text.secondary" align="center" mt={1}>
+                  Ver Indicadores
+                </Typography>
+              </Paper>
+            </motion.div>
+          </Grid>
+        ))}
+      </Grid>
+
+      {/* Linha 3 */}
+      <Grid container spacing={3} justifyContent="center">
+        {['Mercado', 'Design', 'Redes Sociais', 'Promoções'].map((nome) => (
+          <Grid item xs={12} sm={6} md={3} key={nome}>
+            <motion.div whileHover={{ scale: 1.05, y: -5 }} transition={{ duration: 0.3 }} style={{ height: '100%' }}>
+              <Paper
+                component={RouterLink}
+                to={`/setor/${nome.replace(' ', '')}`}
+                elevation={4}
+                sx={{
+                  height: '100%',
+                  p: 3,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 3,
+                  textDecoration: 'none',
+                  background: 'linear-gradient(to bottom, #e3f2fd, #ffffff)',
+                  color: '#0d47a1',
+                  transition: 'all 0.3s ease-in-out',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  '&:hover': {
+                    background: '#bbdefb',
+                    boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
+                    color: '#002171',
+                  }
+                }}
+              >
+                <Typography variant="h6" fontWeight="bold" align="center">{nome}</Typography>
+                <Typography variant="body2" color="text.secondary" align="center" mt={1}>
+                  Ver Indicadores
+                </Typography>
+              </Paper>
+            </motion.div>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+
+    {/* Lado direito - Sidebar com resumos */}
+    <Sidebar />
+  </Box>
+) : (
+  <Outlet />
+)}
         </Box>
       </Box>
     </Box>
