@@ -12,6 +12,7 @@ import olhosFechados from "../assets/olhos_fechados.gif";
 import maoCobrindo from "../assets/mao_cobrindo.gif";
 import espiandoEntreDedos from "../assets/espiando_entre_dedos.gif";
 import confuso from "../assets/confuso.png";
+import logo2 from "../assets/logo.png";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -86,7 +87,7 @@ const Login = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundImage: 'url("/logo.png")',
+        backgroundImage: `url(${logo2})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
