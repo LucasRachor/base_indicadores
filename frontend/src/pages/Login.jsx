@@ -68,7 +68,7 @@ const Login = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('usuario', JSON.stringify(usuario));
       localStorage.setItem('email', email);
-      localStorage.setItem('senha', senha);
+      //localStorage.setItem('senha', senha);
 
       alert('Login realizado com sucesso!');
       navigate('/menu');

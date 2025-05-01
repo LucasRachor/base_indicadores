@@ -30,7 +30,7 @@ app.use('/api', atualizarItemRoutes);
 
 app.get('/', (req, res) => res.send('API Online'));
 
-app.listen(port, async () => {
+app.listen(port, '0.0.0.0', async () => {
   console.log(`Servidor rodando na porta ${port}`);
   await criarPerfisPadrao();
   await criarUsuariosPadrao();
