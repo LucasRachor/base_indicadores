@@ -9,13 +9,13 @@ export default defineConfig({
     port: 5173,
     hmr: {
       host: 'www.fieam.com.br',
-      port: 443,
+      port: 443
     },
     proxy: {
       '/api': {
         target: 'http://10.6.63.30:3010',
         changeOrigin: true,
-        secure: false, // desativa validação SSL (já que o destino é HTTP)
+        secure: false
       }
     }
   },

@@ -1,12 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-
 const app = express();
 const port = process.env.PORT || 3010;
-
 const prisma = require('./prisma/client');
-
 const authRoutes = require('./routes/authRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const setorRoutes = require('./routes/setorRoutes');
@@ -14,8 +11,6 @@ const perfilRoutes = require('./routes/perfilRoutes');
 const itensRouter = require('./routes/itens');
 const atualizarItemRoutes = require('./routes/atualizarItem');
 const jornadaRoutes = require('./routes/jornada');
-
-
 
 app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
