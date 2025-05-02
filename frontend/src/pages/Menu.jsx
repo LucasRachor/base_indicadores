@@ -139,10 +139,11 @@ const LayoutBase = () => {
       <Typography
         variant="h5"
         gutterBottom
-        sx={{ textAlign: 'center', fontWeight: 'bold', color: '#1976d2' }}
+        sx={{ textAlign: 'center', fontWeight: 'bold', color: '#1976d2',marginBottom:'60px' }}
       >
         PAINEL DE INDICADORES
       </Typography>
+     
 
       {/* Linha 1: Geral */}
       <Grid container justifyContent="center" spacing={3} mb={3}>

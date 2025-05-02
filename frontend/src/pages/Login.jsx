@@ -57,19 +57,30 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErro('');
+  
+    // Login local hardcoded
+    if (email === 'paulo.pereira@fieam.org.br' && senha === '10203040') {
+      localStorage.setItem('token', 'token_fake_local');
+      localStorage.setItem('usuario', JSON.stringify({ nome: 'Paulo Pereira', perfil: 'Administrador' }));
+      localStorage.setItem('email', email);
+      alert('Login local realizado com sucesso!');
+      navigate('/menu');
+      return;
+    }
+  
+    // Login com backend
     try {
       const response = await api.post('/auth/login', {
         username: email,
         password: senha
       });
-
+  
       const { token, usuario } = response.data;
-
+  
       localStorage.setItem('token', token);
       localStorage.setItem('usuario', JSON.stringify(usuario));
       localStorage.setItem('email', email);
-      //localStorage.setItem('senha', senha);
-
+  
       alert('Login realizado com sucesso!');
       navigate('/menu');
     } catch (error) {
@@ -78,6 +89,7 @@ const Login = () => {
       setImagemAtual(confuso);
     }
   };
+
 
   return (
     <Box
