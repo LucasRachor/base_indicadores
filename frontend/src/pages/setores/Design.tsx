@@ -86,30 +86,30 @@ const Design: React.FC = () => {
   const data2025 = [
     {
       "indicadores": "Qtd. profissionais ativos no mês",
-      "jan": 4, "fev": "4", "mar": "4", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 4, "sesi": "-", "senai": "-", "iel": "-" }
+      "jan": 4, "fev": "4", "mar": "4", "abr": "4", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": 4, "sesi": "-", "senai": "-", "iel": "-","total geral":"4" }
     },
     {
       "indicadores": "Qtd. de horas trabalhadas no setor",
-      "jan": "704", "fev": "608", "mar": "672", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "1.984", "sesi": "-", "senai": "-", "iel": "-" }
+      "jan": "704", "fev": "608", "mar": "672", "abr": "608", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": "2.592", "sesi": "-", "senai": "-", "iel": "-","total geral":"2.592" }
     },
     {
       "indicadores": "Total de ações executadas no mês",
-      "jan": 207, "fev": "128", "mar": "205", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 540, "sesi": "-", "senai": "-", "iel": "-" }
+      "jan": 207, "fev": "128", "mar": "205", "abr": "215", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": 755, "sesi": "-", "senai": "-", "iel": "-","total geral":"755" }
     },
    
     {
       "indicadores": "Tempo médio por ação executada",
-      "jan": "4h", "fev": "3h", "mar": "3h", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "3h", "sesi": "-", "senai": "-", "iel": "-" }
+      "jan": "4h", "fev": "3h", "mar": "3h", "abr": "3H", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": "3h", "sesi": "-", "senai": "-", "iel": "-","total geral":"-" }
     }, 
     
     {
       "indicadores": "Demanda atendidas compras",
-      "jan": 86, "fev": "4", "mar": "32", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 59, "sesi": 20, "senai": "41", "iel": "2" }
+      "jan": 86, "fev": "4", "mar": "32", "abr": "20", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": 63, "sesi": 25, "senai": "52", "iel": "2","total geral":"142" }
     },
  /*    {
       "indicadores": "Demanda recebida compras",
@@ -118,33 +118,33 @@ const Design: React.FC = () => {
     }, */
     {
       "indicadores": "Demanda recebida baixa complexidade",
-      "jan": 104, "fev": "89", "mar": "116", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 98, "sesi": 161, "senai": 32, "iel": 18 }
+      "jan": 104, "fev": "89", "mar": "116", "abr": "117", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": 162, "sesi": 200, "senai": 40, "iel": 24,"total geral":"426" }
     },
     {
       "indicadores": "Demanda atendidas baixa complexidade",
-      "jan": 104, "fev": "89", "mar": "116", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": {  "fieam": 98, "sesi": 161, "senai": 32, "iel": 18 }
+      "jan": 104, "fev": "89", "mar": "116", "abr": "117", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+     "acumulado": { "fieam": 162, "sesi": 200, "senai": 40, "iel": 24,"total geral":"426" }
     },
     {
       "indicadores": "Demanda recebida média complexidade",
-      "jan": 9, "fev": "23", "mar": "34", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "8", "sesi": 45, "senai": 11, "iel": 2 }
+      "jan": 9, "fev": "23", "mar": "34", "abr": "29", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": "20", "sesi": 55, "senai": 16, "iel": 4,"total geral":"95" }
     },
     {
       "indicadores": "Demanda atendidas média complexidade",
-    "jan": 9, "fev": "23", "mar": "34", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "8", "sesi": 45, "senai": 11, "iel": 2 }
+    "jan": 9, "fev": "23", "mar": "34", "abr": "29", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+    "acumulado": { "fieam": "20", "sesi": 55, "senai": 16, "iel": 4,"total geral":"95" }
     },
     {
       "indicadores": "Demanda recebida alta complexidade",
-      "jan": 8, "fev": "20", "mar": "23", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "5", "sesi": 24, "senai": 17, "iel": 5}
+      "jan": 8, "fev": "20", "mar": "23", "abr": "49", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": "19", "sesi": 51, "senai": 22, "iel": 8,"total geral":"100"}
     },
     {
       "indicadores": "Demanda atendidas alta complexidade",
-      "jan": 8, "fev": "20", "mar": "23", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "5", "sesi": 24, "senai": 17, "iel": 5 }
+      "jan": 8, "fev": "20", "mar": "23", "abr": "49", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": "19", "sesi": 51, "senai": 22, "iel": 8,"total geral":"100"}
     },
   ]
   const categorizeIndicator = (indicator: string): string => {
@@ -279,7 +279,7 @@ const Design: React.FC = () => {
       )
     )}
     <TableCell
-      colSpan={4}
+      colSpan={5}
       align="center"
       style={{
         fontWeight: "bold",
@@ -292,7 +292,7 @@ const Design: React.FC = () => {
     </TableCell>
   </TableRow>
   <TableRow>
-    {["FIEAM", "SESI", "SENAI", "IEL"].map((name, index) => (
+    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL GERAL"].map((name, index) => (
       <TableCell
         key={`acumulado-${index}`}
         align="center"
@@ -365,7 +365,7 @@ const Design: React.FC = () => {
               : "-"}
           </TableCell>
         ))}
-        {["fieam", "sesi", "senai", "iel"].map((key) => (
+        {["fieam", "sesi", "senai", "iel","total geral"].map((key) => (
           <TableCell align="center" key={key}>
             {row.acumulado && row.acumulado[key] !== undefined ? row.acumulado[key] : "-"}
           </TableCell>
@@ -377,7 +377,7 @@ const Design: React.FC = () => {
           </Table>
         </TableContainer>
       </Paper>
-      <h4>Atualizado até 01/04/2025 às 11:55</h4>
+      <h4>Atualizado até 01/05/2025 às 11:55</h4>
     </div>
   );
 };

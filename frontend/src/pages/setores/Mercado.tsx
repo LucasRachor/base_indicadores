@@ -123,30 +123,30 @@ const Mercado: React.FC = () => {
     const data2025 = [
       {
         "indicadores": "Qtd. profissionais ativos no mês",
-        "jan": "4", "fev": "5", "mar": "5", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-        "acumulado": { "fieam": "5", "sesi": "-", "senai": "-", "iel": "-" }
+        "jan": "4", "fev": "5", "mar": "5", "abr": "5", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+        "acumulado": { "fieam": "5", "sesi": "-", "senai": "-", "iel": "-","total geral":"5" }
       },
       {
         "indicadores": "Qtd. de horas trabalhadas no setor",
-        "jan": "660", "fev": "722", "mar": "840", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-        "acumulado": { "fieam": "2.222", "sesi": "-", "senai": "-", "iel": "-" }
+        "jan": "660", "fev": "722", "mar": "840", "abr": "722", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+        "acumulado": { "fieam": "2.944", "sesi": "-", "senai": "-", "iel": "-","total geral":"2.944" }
       },
       {
         "indicadores": "Total de ações executadas no mês",
-        "jan": 24, "fev": "29", "mar": "25", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-        "acumulado": { "fieam": "32", "sesi": "30", "senai": "11", "iel": "5" }
+        "jan": 24, "fev": "29", "mar": "25", "abr": "14", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+        "acumulado": { "fieam": "42", "sesi": "34", "senai": "11", "iel": "5","total geral":"92" }
       },
       {
         "indicadores": "Tempo médio por ação executada",
-        "jan": "27h30min", "fev": "24h53min", "mar": "33h36min", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-        "acumulado": { "fieam": "25h", "sesi": "-", "senai": "-", "iel": "-" }
+        "jan": "27h30min", "fev": "24h53min", "mar": "33h36min", "abr": "51h30min", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+        "acumulado": { "fieam": "33h", "sesi": "-", "senai": "-", "iel": "-","total geral":"5" }
       }, 
     {
       "indicadores": "Nº de Projetos/Pesquisa em andamento",
       "jan": "7",
       "fev": "9",
       "mar": "4",
-      "abr": "-",
+      "abr": "1",
       "mai": "-",
       "jun": "-",
       "jul": "-",
@@ -157,16 +157,16 @@ const Mercado: React.FC = () => {
       "dez": "-",
       "acumulado": {
         "fieam": "14",
-        "sesi": "5",
+        "sesi": "6",
         "senai": "1",
-        "iel": "-"
+        "iel": "-","total geral":"21"
       }
     }, {
       "indicadores": "Nº de Projetos realizados",
       "jan": "4",
       "fev": "5",
       "mar": "3",
-      "abr": "-",
+      "abr": "6",
       "mai": "-",
       "jun": "-",
       "jul": "-",
@@ -176,10 +176,10 @@ const Mercado: React.FC = () => {
       "nov": "-",
       "dez": "-",
       "acumulado": {
-        "fieam": "8",
-        "sesi": "4",
+        "fieam": "13",
+        "sesi": "5",
         "senai": "-",
-        "iel": "-"
+        "iel": "-","total geral":"18"
       }
     },
       {
@@ -187,7 +187,7 @@ const Mercado: React.FC = () => {
         "jan": "7",
         "fev": "8",
         "mar": "12",
-        "abr": "-",
+        "abr": "6",
         "mai": "-",
         "jun": "-",
         "jul": "-",
@@ -196,14 +196,14 @@ const Mercado: React.FC = () => {
         "out": "-",
         "nov": "-",
         "dez": "-",
-        "acumulado": { "fieam": "7", "sesi": "12", "senai": "5", "iel": "3" }
+        "acumulado": { "fieam": "12", "sesi": "13", "senai": "5", "iel": "3","total geral":"33" }
       },
       {
         "indicadores": "Nº de Apresentações/Relatórios/Análise de resultado de pesquisa",
         "jan": "6",
         "fev": "7",
         "mar": "6",
-        "abr": "-",
+        "abr": "1",
         "mai": "-",
         "jun": "-",
         "jul": "-",
@@ -212,7 +212,7 @@ const Mercado: React.FC = () => {
         "out": "-",
         "nov": "-",
         "dez": "-",
-        "acumulado": { "fieam": 3, "sesi": 9, "senai": 5, "iel": 2 }
+        "acumulado": { "fieam": 3, "sesi": 10, "senai": 5, "iel": 2,"total geral":"20" }
       },
 
   ]  
@@ -220,21 +220,13 @@ const Mercado: React.FC = () => {
   const categorizeIndicator = (indicator: string): string => {
     const pagoIndicators = [
       "Número de anúncios",
-      "Alcance total",
-      "Impressões (ADS)",
-      "Cliques no anúncio",
-      "CTR (Click-Through Rate)",
-      "CPC (Custo por Clique)",
-      "COM (Custo por Mil Impressões)",
-      "Conversões",
-      "Taxa de conversão (%)",
-      "CPA (Custo por Aquisição)",
+      
     ];
   
     const emailIndicators = [
       
      "Qtd de E-mails enviados",
-      "Taxa de abertura de e-mail",
+     
       
     ];
    const siteIndicators = ["Site - Visitantes únicos"];
@@ -255,8 +247,6 @@ const Mercado: React.FC = () => {
   };
 
   const data = selectedYear === "2024" ? data2024 : data2025;
-
-
 
    const groupedData = data.reduce((acc, row) => {
     const category = categorizeIndicator(row.indicadores);
@@ -343,7 +333,7 @@ const Mercado: React.FC = () => {
       )
     )}
     <TableCell
-      colSpan={4}
+      colSpan={5}
       align="center"
       style={{
         fontWeight: "bold",
@@ -356,7 +346,7 @@ const Mercado: React.FC = () => {
     </TableCell>
   </TableRow>
   <TableRow>
-    {["FIEAM", "SESI", "SENAI", "IEL"].map((name, index) => (
+    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL GERAL"].map((name, index) => (
       <TableCell
         key={`acumulado-${index}`}
         align="center"
@@ -410,7 +400,7 @@ const Mercado: React.FC = () => {
               : "-"}
           </TableCell>
         ))}
-        {["fieam", "sesi", "senai", "iel"].map((key) => (
+        {["fieam", "sesi", "senai", "iel","total geral"].map((key) => (
           <TableCell align="center" key={key}>
             {row.acumulado && row.acumulado[key] !== undefined ? row.acumulado[key] : "-"}
           </TableCell>
@@ -422,7 +412,7 @@ const Mercado: React.FC = () => {
           </Table>
         </TableContainer>
       </Paper>
-      <h4>Atualizado até 01/04/2025 às 10h</h4>
+      <h4>Atualizado até 01/05/2025 às 10h</h4>
     </div>
   );
 };

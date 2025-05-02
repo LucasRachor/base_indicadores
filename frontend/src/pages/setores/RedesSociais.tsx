@@ -144,120 +144,120 @@ const RedesSociais: React.FC = () => {
   const data2025 = [
     {
       "indicadores": "Qtd. profissionais ativos no mês",
-      "jan": 3, "fev": "3", "mar": "3", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 3, "sesi": "-", "senai": "-", "iel": "-" }
+      "jan": 3, "fev": "3", "mar": "3", "abr": "3", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": 3, "sesi": "-", "senai": "-", "iel": "-","total geral":"3" }
     },
     {
       "indicadores": "Qtd. de horas trabalhadas no setor",
-      "jan": 528, "fev": "456", "mar": "504", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam":"1.488", "sesi": "-", "senai": "-", "iel": "-" }
+      "jan": 528, "fev": "456", "mar": "504", "abr": "456", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam":"1.488", "sesi": "-", "senai": "-", "iel": "-","total geral":"4" }
     },
     {
       "indicadores": "Total de ações executadas no mês",
       "jan": "-", "fev": "-", "mar": "-", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "-", "sesi": "-", "senai": "-", "iel": "-" }
+      "acumulado": { "fieam": "-", "sesi": "-", "senai": "-", "iel": "-","total geral":"4" }
     },
    
     {
       "indicadores": "Tempo médio por ação executada",
       "jan": "-", "fev": "-", "mar": "-", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "-", "sesi": "-", "senai": "-", "iel": "-" }
+      "acumulado": { "fieam": "-", "sesi": "-", "senai": "-", "iel": "-","total geral":"4" }
     }, 
     {
       "indicadores": "Número de anúncios",
-      "jan": "-", "fev": "-", "mar": "125", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "-", "sesi": "34", "senai": "74", "iel": "17" }
+      "jan": "-", "fev": "-", "mar": "125", "abr": "31", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": "-", "sesi": "43", "senai": "95", "iel": "18","total geral":"156" }
     },
     {
       "indicadores": "Alcance total",
-      "jan": "918.090", "fev": "1.132.613", "mar": "1.191.849", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "-", "sesi": "585.861", "senai": "579.414", "iel": "26.574"
+      "jan": "918.090", "fev": "1.132.613", "mar": "1.191.849", "abr": "236.216", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": "-", "sesi": "697.657", "senai": "676.781", "iel": "53.627","total geral":"1.428.065"
       }
     },
     {
       "indicadores": "Impressões (ADS)",
-      "jan": "1.563.641", "fev": "3.384.256", "mar": "3.263.810", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "-", "sesi": "1.774.586", "senai": "1.423.569", "iel": "65.655"
+      "jan": "1.563.641", "fev": "3.384.256", "mar": "3.263.810", "abr": "685.290", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
+      "acumulado": { "fieam": "-", "sesi": "2.163.697", "senai": "1.687.876", "iel": "97.527","total geral":"3.949.100"
       }
     },
     {
       "indicadores": "Cliques no anúncio",
       "jan": "17.214", "fev": "23.760", "mar": "48.370", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "-", "sesi": "14.987", "senai": "32.430", "iel": "953" }
+      "acumulado": { "fieam": "-", "sesi": "14.987", "senai": "32.430", "iel": "953","total geral":"4" }
     },
     {
       "indicadores": "CTR (Click-Through Rate)",
       "jan": "1.86", "fev": "4.22", "mar": "4.25", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam":"-", "sesi": "1,25", "senai": "1,76", "iel":"1,24"}
+      "acumulado": { "fieam":"-", "sesi": "1,25", "senai": "1,76", "iel":"1,24","total geral":"4"}
     },
     {
       "indicadores": "CPC (Custo por Clique)",
       "jan": "2.97", "fev": "1.52", "mar": "5,37", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "-", "sesi": "2", "senai": "1,07", "iel": "2,3" }
+      "acumulado": { "fieam": "-", "sesi": "2", "senai": "1,07", "iel": "2,3","total geral":"4" }
     },
     {
       "indicadores": "COM (Custo por Mil Impressões)",
       "jan": "51.72", "fev": "33,41", "mar": "26,86", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "-", "sesi": "9,13", "senai":"8,74", "iel": "8,99"}
+      "acumulado": { "fieam": "-", "sesi": "9,13", "senai":"8,74", "iel": "8,99","total geral":"4"}
     },
     {
       "indicadores": "Conversões",
       "jan": 1.603, "fev": "5.492", "mar": "5.353", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "-", "sesi": "1.016", "senai":"4.217", "iel": "120" }
+      "acumulado": { "fieam": "-", "sesi": "1.016", "senai":"4.217", "iel": "120","total geral":"4" }
     },
     {
       "indicadores": "Taxa de conversão (%)",
       "jan": 59, "fev": "27", "mar": "34", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "-", "sesi": 11, "senai": "14", "iel": "9" }
+      "acumulado": { "fieam": "-", "sesi": 11, "senai": "14", "iel": "9","total geral":"4" }
     },
     {
       "indicadores": "CPA (Custo por Aquisição)",
       "jan": "13,15", "fev": "15,4", "mar": "16,39", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "-", "sesi": 7.41, "senai": "4,14", "iel": "4,84" }
+      "acumulado": { "fieam": "-", "sesi": 7.41, "senai": "4,14", "iel": "4,84","total geral":"4" }
     },
     {
       "indicadores": "Qtd de E-mails enviados",
       "jan": 1.476, "fev": "519", "mar": " 619", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 129, "sesi": 1.476, "senai": 751, "iel": "258" }
+      "acumulado": { "fieam": 129, "sesi": 1.476, "senai": 751, "iel": "258","total geral":"4" }
     },
     {
       "indicadores": "Taxa de abertura de e-mail",
       "jan": 27, "fev": "10", "mar": "14", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 8, "sesi": 20, "senai": 17, "iel": "6" }
+      "acumulado": { "fieam": 8, "sesi": 20, "senai": 17, "iel": "6","total geral":"4" }
     },
     {
       "indicadores": "Site - Visitantes únicos",
       "jan": 9.395, "fev": "11.544", "mar": "7.234", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 3.147, "sesi": 2.100, "senai": 1.987, "iel": "-" }
+      "acumulado": { "fieam": 3.147, "sesi": 2.100, "senai": 1.987, "iel": "-","total geral":"4" }
     },
     {
       "indicadores": "Publicação nas redes sociais",
       "jan": "94", "fev": "674", "mar": "225", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 50, "sesi": 474, "senai": 150, "iel": 94 }
+      "acumulado": { "fieam": 50, "sesi": 474, "senai": 150, "iel": 94,"total geral":"4" }
     },
 {
       "indicadores": "Resposta de comentários nas redes sociais",
       "jan": 157, "fev": "2.220", "mar": "1.835", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 3, "sesi": 1.449, "senai": 203, "iel": 180 }
+      "acumulado": { "fieam": 3, "sesi": 1.449, "senai": 203, "iel": 180,"total geral":"4" }
     },
     {
       "indicadores": "Contas Alcançadas",
       "jan": 88.867, "fev": "450.493", "mar": "575.176", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "4.307", "sesi": "420.545", "senai": "96.728", "iel": "53.596" }
+      "acumulado": { "fieam": "4.307", "sesi": "420.545", "senai": "96.728", "iel": "53.596","total geral":"4" }
     },
     {
       "indicadores": "Interações",
       "jan": 3.672, "fev": "46.495", "mar": "44.782", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 229, "sesi": "31.132", "senai": "7.106", "iel": "6315" }
+      "acumulado": { "fieam": 229, "sesi": "31.132", "senai": "7.106", "iel": "6315","total geral":"4" }
     },
 {
       "indicadores": "Taxa de Engajamento",
       "jan": 12, "fev": "10", "mar": "4", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "3,18", "sesi": "3,12", "senai": "3,98", "iel": "6,08" }    }, 
+      "acumulado": { "fieam": "3,18", "sesi": "3,12", "senai": "3,98", "iel": "6,08","total geral":"4" }    }, 
     {
       "indicadores": "Seguidores",
       "jan": 171.729, "fev": "177.273", "mar": "181.501", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": 9.149, "sesi": 63.581, "senai": 87.003, "iel": 21.768 }
+      "acumulado": { "fieam": 9.149, "sesi": 63.581, "senai": 87.003, "iel": 21.768,"total geral":"4" }
     }, 
   ]
   
@@ -414,7 +414,7 @@ Tipo
       )
     )}
     <TableCell
-      colSpan={4}
+      colSpan={5}
       align="center"
       style={{
         fontWeight: "bold",
@@ -427,7 +427,7 @@ Tipo
     </TableCell>
   </TableRow>
   <TableRow>
-    {["FIEAM", "SESI", "SENAI", "IEL"].map((name, index) => (
+    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL GERAL"].map((name, index) => (
       <TableCell
         key={`acumulado-${index}`}
         align="center"
@@ -501,7 +501,7 @@ Tipo
               : "-"}
           </TableCell>
         ))}
-        {["fieam", "sesi", "senai", "iel"].map((key) => (
+        {["fieam", "sesi", "senai", "iel","total geral"].map((key) => (
           <TableCell align="center" key={key}>
             {row.acumulado && row.acumulado[key] !== undefined ? row.acumulado[key] : "-"}
           </TableCell>
@@ -513,7 +513,7 @@ Tipo
           </Table>
         </TableContainer>
       </Paper>
-      <h4>Atualizado até 02/04/2025 às 12h</h4>
+      <h4>Atualizado até 01/05/2025 às 12h</h4>
     </div>
   );
 };

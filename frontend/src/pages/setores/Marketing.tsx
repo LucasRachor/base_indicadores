@@ -35,39 +35,38 @@ const Marketing: React.FC = () => {
   ];
 
   const data2025 = [
-    { indicadores: "Qtd. profissionais ativos no mês", jan: 6, fev: 6, mar: "6", abr: "-", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-", dez: "-", 
-      acumulado: { fieam: 6, sesi: "-", senai: "-", iel: "-" } },
+    { indicadores: "Qtd. profissionais ativos no mês", jan: 6, fev: 6, mar: "6", abr: "6", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-", dez: "-", 
+      acumulado: { fieam: 6, sesi: "-", senai: "-", iel: "-","total geral":"6" } },
 
-    { indicadores: "Qtd. horas de trabalhadas no setor", jan: 1.056, fev: 912, mar: "1.008", abr: "-", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
-      acumulado: { fieam: "2.976", sesi: "-", senai: "-", iel: "-" } },
+    { indicadores: "Qtd. horas de trabalhadas no setor", jan: 1.056, fev: 912, mar: "1.008", abr: "912", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
+      acumulado: { fieam: "3.888", sesi: "-", senai: "-", iel: "-","total geral":"3.888" } },
 
-    { indicadores: "Total de ações executadas no mês", jan: 962, fev: "1012", mar: "980", abr: "-", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
-      acumulado: { fieam: "151", sesi: "1.746", senai: "664", iel: "393" } },
+    { indicadores: "Total de ações executadas no mês", jan: 962, fev: "1012", mar: "980", abr: "1.459", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
+      acumulado: { fieam: "188", sesi: "2.417", senai: "1.091", iel: "717","total geral":"4.413" } },
 
-    { indicadores: "Tempo médio por ação executada", jan: "01h01min", fev: "1h06min", mar: "1h", abr: "-", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
-      acumulado: { fieam: "1h", sesi: "-", senai: "-", iel: "-" }, },
+    { indicadores: "Tempo médio por ação executada", jan: "01h01min", fev: "1h06min", mar: "1h", abr: "37min", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
+      acumulado: { fieam: "55min", sesi: "-", senai: "-", iel: "-","total geral":"-" }, },
 
-    { indicadores: "Campanhas ativas", jan: "13", fev: "13", mar: "15", abr: "-", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-", dez: "-", 
-      acumulado: { fieam: 6, sesi: 13, senai: 10, iel: 12 } },
+    { indicadores: "Campanhas ativas", jan: "13", fev: "13", mar: "15", abr: "12", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-", dez: "-", 
+      acumulado: { fieam: 7, sesi: 15, senai: 18, iel: 13,"total geral":"53" } },
 
-    { indicadores: "Roteiro de vídeos", jan: 48, fev: "64", mar: "88", abr: "-", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
-      acumulado: { fieam: 6, sesi: 129, senai: 40, iel:  25} },
+    { indicadores: "Roteiro de vídeos", jan: 48, fev: "64", mar: "88", abr: "60", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
+      acumulado: { fieam: 10, sesi: 172, senai: 43, iel:  35,"total geral":"260"} },
 
-    { indicadores: "Vídeos Produzidos", jan: 42, fev: "60", mar: 
-      "88", abr: "-", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-",
-       acumulado: { fieam: 6, sesi: 119, senai: 36, iel: 29 } },
+    { indicadores: "Vídeos Produzidos", jan: 42, fev: "60", mar:"88", abr: "60", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-",
+       acumulado: { fieam: 10, sesi: 162, senai: 39, iel: 39,"total geral":"250" } },
 
-    { indicadores: "Cards Produzidos", jan: 397, fev: "314", mar: "172", abr: "-", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
-      acumulado: { fieam: 44, sesi: 485, senai: 244, iel: 110 }, },
+    { indicadores: "Cards Produzidos", jan: 397, fev: "314", mar: "172", abr: "396", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
+      acumulado: { fieam: 49, sesi: 636, senai: 376, iel: 218,"total geral":"1.279" }, },
 
-    { indicadores: "Stories Produzidos", jan: 209, fev: "262", mar: "346", abr: "-", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov:"-", dez: "-", 
-      acumulado: { fieam: 37, sesi: 524, senai: 166, iel: 90}, },
+    { indicadores: "Stories Produzidos", jan: 209, fev: "262", mar: "346", abr: "454", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov:"-", dez: "-", 
+      acumulado: { fieam: 48, sesi: 745, senai: 307, iel: 171, "total geral":"1.271"}, },
 
-    { indicadores: "Flyers Produzidos", jan: 38, fev: "21", mar: "30", abr: "-", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-" ,dez: "-", 
-      acumulado: { fieam: 8, sesi: 39, senai: 22, iel: 20 } ,},
+    { indicadores: "Flyers Produzidos", jan: 38, fev: "21", mar: "30", abr: "32", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-" ,dez: "-", 
+      acumulado: { fieam: 11, sesi: 53, senai: 30, iel: 27,"total geral":"121" } ,},
 
-    { indicadores: "Copies Produzidos", jan: 215, fev: "278", mar: "241", abr: "-", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
-      acumulado: { fieam: 44, sesi: 437, senai: 146, iel: 107 } },
+    { indicadores: "Copies Produzidos", jan: 215, fev: "278", mar: "241", abr: "445", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
+      acumulado: { fieam: 53, sesi: 634, senai: 278, iel: 214,"total geral":"1.179" } },
   ];
 
   const categorizeIndicator = (indicator: string): string => {
@@ -207,7 +206,7 @@ Tipo
       )
     )}
     <TableCell
-      colSpan={4}
+      colSpan={5}
       align="center"
       style={{
         fontWeight: "bold",
@@ -220,7 +219,7 @@ Tipo
     </TableCell>
   </TableRow>
   <TableRow>
-    {["FIEAM", "SESI", "SENAI", "IEL"].map((name, index) => (
+    {["FIEAM", "SESI", "SENAI", "IEL", "TOTAL GERAL"].map((name, index) => (
       <TableCell
         key={`acumulado-${index}`}
         align="center"
@@ -294,7 +293,7 @@ Tipo
               : "-"}
           </TableCell>
         ))}
-        {["fieam", "sesi", "senai", "iel"].map((key) => (
+        {["fieam", "sesi", "senai", "iel", "total geral"].map((key) => (
           <TableCell align="center" key={key}>
             {row.acumulado && row.acumulado[key] !== undefined ? row.acumulado[key] : "-"}
           </TableCell>
@@ -307,7 +306,7 @@ Tipo
           </Table>
         </TableContainer>
       </Paper>
-      <h4>Atualizado até 02/04/2025 às 11h</h4>
+      <h4>Atualizado até 01/05/2025 às 11h</h4>
     </div>
   );
 };
