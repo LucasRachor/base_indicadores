@@ -46,6 +46,9 @@ model Historico {
   @@index([usuarioId])
 }
 
+
+
+
 model Instituicao {
   id      Int          @id @default(autoincrement())
   nome    String       @unique

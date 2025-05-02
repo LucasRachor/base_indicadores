@@ -39,7 +39,7 @@ function ResponsiveAppBar() {
       sx={{
         width: '100%',
         zIndex: (theme) => theme.zIndex.drawer + 1,
-        backgroundColor: "#19c1d2"
+        backgroundColor: "#fff"
       }}
     >
       <Toolbar
@@ -55,7 +55,15 @@ function ResponsiveAppBar() {
           <Button component={RouterLink} to="/menu" sx={{ p: 0 }}>
             <img src={fieam} alt="Logo FIEAM" style={{ maxWidth: "60px", height: "auto" }} />
           </Button>
+         
         </Box>
+        <Typography
+        variant="h4"
+        gutterBottom
+        sx={{ textAlign: 'center', fontWeight: 'bold', color: '#1976d2' }}
+      >
+        DIRETORIA CORPORATIVA DE MARKETING
+      </Typography>
 
         {/* Nome do usuário com botão dropdown */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -66,21 +74,21 @@ function ResponsiveAppBar() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: 1,
-                color: 'white',
+                color: 'gray',
                 fontWeight: 'bold',
                 textTransform: 'none',
                 borderRadius: 2,
                 px: 2,
                 py: 1,
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
                 '&:hover': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  backgroundColor: 'rgba(0, 0, 0, 0.2)',
                 },
-                border: '1px solid rgba(255,255,255,0.3)',
+                border: '1px solid rgba(92, 85, 85, 0.3)',
               }}
             >
               {nomeUsuario}
-              <ArrowDropDownIcon sx={{ color: 'white' }} />
+              <ArrowDropDownIcon sx={{ color: 'black' }} />
             </Button>
           </Tooltip>
           <Menu

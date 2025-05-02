@@ -134,13 +134,7 @@ const LayoutBase = () => {
           {isMenuPage ? (
   <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, flexWrap: 'wrap' }}>
     <Box sx={{ flexGrow: 1 }}>
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{ textAlign: 'center', fontWeight: 'bold', color: '#1976d2' }}
-      >
-        DIRETORIA CORPORATIVA DE MARKETING
-      </Typography>
+     
 
       <Typography
         variant="h5"
@@ -189,7 +183,7 @@ const LayoutBase = () => {
 
       {/* Linha 2 */}
       <Grid container spacing={3} justifyContent="center" mb={3}>
-        {['Comercial', 'Call Center', 'Marketing', 'Administração'].map((nome) => (
+        {['Comercial', 'Call Center', 'Marketing', 'Administracao'].map((nome) => (
           <Grid item xs={12} sm={6} md={3} key={nome}>
             <motion.div whileHover={{ scale: 1.05, y: -5 }} transition={{ duration: 0.3 }} style={{ height: '100%' }}>
               <Paper
@@ -228,7 +222,7 @@ const LayoutBase = () => {
 
       {/* Linha 3 */}
       <Grid container spacing={3} justifyContent="center">
-        {['Mercado', 'Design', 'Redes Sociais', 'Promoções'].map((nome) => (
+        {['Mercado', 'Design', 'Redes Sociais', 'Promocoes'].map((nome) => (
           <Grid item xs={12} sm={6} md={3} key={nome}>
             <motion.div whileHover={{ scale: 1.05, y: -5 }} transition={{ duration: 0.3 }} style={{ height: '100%' }}>
               <Paper
