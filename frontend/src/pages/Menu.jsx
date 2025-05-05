@@ -24,11 +24,11 @@ const setores = [
   { nome: 'Comercial', rota: '/setor/Comercial' },
   { nome: 'Call Center', rota: '/setor/CallCenter' },
   { nome: 'Marketing', rota: '/setor/Marketing' },
-  { nome: 'Administração', rota: '/setor/Administracao' },
+  { nome: 'Administração', rota: '/setor/Administracao' }, // "rota" sem acento
   { nome: 'Mercado', rota: '/setor/Mercado' },
   { nome: 'Design', rota: '/setor/Design' },
   { nome: 'Redes Sociais', rota: '/setor/RedesSociais' },
-  { nome: 'Promoções', rota: '/setor/Promocoes' }
+  { nome: 'Promoções', rota: '/setor/Promocoes' } // "rota" sem acento
 ];
 
 
@@ -182,83 +182,91 @@ const LayoutBase = () => {
         </Grid>
       </Grid>
 
-      {/* Linha 2 */}
-      <Grid container spacing={3} justifyContent="center" mb={3}>
-        {['Comercial', 'Call Center', 'Marketing', 'Administracao'].map((nome) => (
-          <Grid item xs={12} sm={6} md={3} key={nome}>
-            <motion.div whileHover={{ scale: 1.05, y: -5 }} transition={{ duration: 0.3 }} style={{ height: '100%' }}>
-              <Paper
-                component={RouterLink}
-                to={`/setor/${nome.replace(' ', '')}`}
-                elevation={4}
-                sx={{
-                  height: '100%',
-                  p: 3,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 3,
-                  textDecoration: 'none',
-                  background: 'linear-gradient(to bottom, #e3f2fd, #ffffff)',
-                  color: '#0d47a1',
-                  transition: 'all 0.3s ease-in-out',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                  '&:hover': {
-                    background: '#bbdefb',
-                    boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
-                    color: '#002171',
-                  }
-                }}
-              >
-                <Typography variant="h6" fontWeight="bold" align="center">{nome}</Typography>
-                <Typography variant="body2" color="text.secondary" align="center" mt={1}>
-                  Ver Indicadores
-                </Typography>
-              </Paper>
-            </motion.div>
-          </Grid>
-        ))}
+     {/* Linha 2 */}
+<Grid container spacing={3} justifyContent="center" mb={3}>
+  {setores
+    .filter(({ nome }) =>
+      ['Comercial', 'Call Center', 'Marketing', 'Administração'].includes(nome)
+    )
+    .map(({ nome, rota }) => (
+      <Grid item xs={12} sm={6} md={3} key={nome}>
+        <motion.div whileHover={{ scale: 1.05, y: -5 }} transition={{ duration: 0.3 }} style={{ height: '100%' }}>
+          <Paper
+            component={RouterLink}
+            to={rota}
+            elevation={4}
+            sx={{
+              height: '100%',
+              p: 3,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 3,
+              textDecoration: 'none',
+              background: 'linear-gradient(to bottom, #e3f2fd, #ffffff)',
+              color: '#0d47a1',
+              transition: 'all 0.3s ease-in-out',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+              '&:hover': {
+                background: '#bbdefb',
+                boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
+                color: '#002171',
+              }
+            }}
+          >
+            <Typography variant="h6" fontWeight="bold" align="center">{nome}</Typography>
+            <Typography variant="body2" color="text.secondary" align="center" mt={1}>
+              Ver Indicadores
+            </Typography>
+          </Paper>
+        </motion.div>
       </Grid>
+    ))}
+</Grid>
 
-      {/* Linha 3 */}
-      <Grid container spacing={3} justifyContent="center">
-        {['Mercado', 'Design', 'Redes Sociais', 'Promocoes'].map((nome) => (
-          <Grid item xs={12} sm={6} md={3} key={nome}>
-            <motion.div whileHover={{ scale: 1.05, y: -5 }} transition={{ duration: 0.3 }} style={{ height: '100%' }}>
-              <Paper
-                component={RouterLink}
-                to={`/setor/${nome.replace(' ', '')}`}
-                elevation={4}
-                sx={{
-                  height: '100%',
-                  p: 3,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 3,
-                  textDecoration: 'none',
-                  background: 'linear-gradient(to bottom, #e3f2fd, #ffffff)',
-                  color: '#0d47a1',
-                  transition: 'all 0.3s ease-in-out',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                  '&:hover': {
-                    background: '#bbdefb',
-                    boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
-                    color: '#002171',
-                  }
-                }}
-              >
-                <Typography variant="h6" fontWeight="bold" align="center">{nome}</Typography>
-                <Typography variant="body2" color="text.secondary" align="center" mt={1}>
-                  Ver Indicadores
-                </Typography>
-              </Paper>
-            </motion.div>
-          </Grid>
-        ))}
+{/* Linha 3 */}
+<Grid container spacing={3} justifyContent="center">
+  {setores
+    .filter(({ nome }) =>
+      ['Mercado', 'Design', 'Redes Sociais', 'Promoções'].includes(nome)
+    )
+    .map(({ nome, rota }) => (
+      <Grid item xs={12} sm={6} md={3} key={nome}>
+        <motion.div whileHover={{ scale: 1.05, y: -5 }} transition={{ duration: 0.3 }} style={{ height: '100%' }}>
+          <Paper
+            component={RouterLink}
+            to={rota}
+            elevation={4}
+            sx={{
+              height: '100%',
+              p: 3,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 3,
+              textDecoration: 'none',
+              background: 'linear-gradient(to bottom, #e3f2fd, #ffffff)',
+              color: '#0d47a1',
+              transition: 'all 0.3s ease-in-out',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+              '&:hover': {
+                background: '#bbdefb',
+                boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
+                color: '#002171',
+              }
+            }}
+          >
+            <Typography variant="h6" fontWeight="bold" align="center">{nome}</Typography>
+            <Typography variant="body2" color="text.secondary" align="center" mt={1}>
+              Ver Indicadores
+            </Typography>
+          </Paper>
+        </motion.div>
       </Grid>
+    ))}
+</Grid>
     </Box>
 
     {/* Lado direito - Sidebar com resumos */}

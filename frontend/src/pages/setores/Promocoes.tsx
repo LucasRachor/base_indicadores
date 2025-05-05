@@ -100,53 +100,53 @@ const Promocoes: React.FC = () => {
     [
       {
         "indicadores": "Qtd. profissionais ativos no mês",
-        "jan": 3, "fev": "3", "mar": "2", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-","dez": "-",
-        "acumulado": { "fieam": "3", "sesi": "-", "senai": "-", "iel": "-" }
+        "jan": 3, "fev": "3", "mar": "2", "abr": "3", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-","dez": "-",
+        "acumulado": { "fieam": "3", "sesi": "-", "senai": "-", "iel": "-","total geral":"-" }
       },
       {
         "indicadores": "Qtd. de horas trabalhadas no setor",
-        "jan": "528", "fev": "456", "mar": "352", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-","dez": "-",
-        "acumulado": { "fieam": "1336", "sesi": "-", "senai": "-", "iel": "-" }
+        "jan": "528", "fev": "456", "mar": "352", "abr": "456", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-","dez": "-",
+        "acumulado": { "fieam": "1.792", "sesi": "-", "senai": "-", "iel": "-","total geral":"1.792" }
       },
       {
         "indicadores": "Total de ações executadas no mês",
-        "jan": "137" , "fev": "134", "mar": "61", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-","dez": "-",
-        "acumulado": { "fieam": "111", "sesi": "-", "senai": "-", "iel": "-" }
+        "jan": "137" , "fev": "134", "mar": "61", "abr": "667", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-","dez": "-",
+        "acumulado": { "fieam": "977", "sesi": "15", "senai": "7", "iel": "-","total geral":"999" }
       },
       {
         "indicadores": "Tempo médio por ação executada",
-        "jan": "3h51min", "fev": "3h25min", "mar": "5h46min", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-","dez": "-",
-        "acumulado": { "fieam": "4h15min", "sesi": "-", "senai": "-", "iel": "-" }
+        "jan": "3h", "fev": "3h", "mar": "5h", "abr": "1h", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-","dez": "-",
+        "acumulado": { "fieam": "3h", "sesi": "-", "senai": "-", "iel": "-","total geral":"3" }
       }, 
       {
         "indicadores": "Número de ações nas empresas",
-        "jan": "6", "fev": "13", "mar": "6", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
-        "acumulado": { "fieam": "25", "sesi": "-", "senai": "-", "iel": "-" }
+        "jan": "6", "fev": "13", "mar": "6", "abr": "15", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
+        "acumulado": { "fieam": "40", "sesi": "-", "senai": "-", "iel": "-","total geral":"40" }
       },
       {
         "indicadores": "Número de eventos externos",
-        "jan": "-", "fev": "1", "mar": "2", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
-        "acumulado": { "fieam": "3", "sesi": "-", "senai": "-", "iel": "-" }
+        "jan": "-", "fev": "1", "mar": "2", "abr": "2", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
+        "acumulado": { "fieam": "5", "sesi": "-", "senai": "-", "iel": "-","total geral":"5" }
       },
       {
         "indicadores": "Qtd leads captados em ações nas empresas",
-        "jan": "124", "fev": "113", "mar": "38", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
-        "acumulado": { "fieam": "275", "sesi": "-", "senai": "-", "iel": "-" }
+        "jan": "124", "fev": "113", "mar": "38", "abr": "259", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
+        "acumulado": { "fieam": "534", "sesi": "-", "senai": "-", "iel": "-","total geral":"534" }
       },
       {
         "indicadores": "Qtd leads captados em eventos externos (feiras)",
-        "jan": "-", "fev": "2", "mar": "10", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
-        "acumulado": { "fieam": "12", "sesi": "-", "senai": "-", "iel": "-" }
+        "jan": "-", "fev": "2", "mar": "10", "abr": "386", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
+        "acumulado": { "fieam": "398", "sesi": "-", "senai": "-", "iel": "-","total geral":"398" }
       },
       {
         "indicadores": "Nº de outdoors ativos por instituição",
-        "jan":"7", "fev": "5", "mar": "5", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
-        "acumulado": { "fieam": "-", "sesi": 12, "senai": 5, "iel": "-" }
+        "jan":"7", "fev": "5", "mar": "5", "abr": "5", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
+        "acumulado": { "fieam": "-", "sesi": 15, "senai": 7, "iel": "-","total geral":"22" }
       },
       {
         "indicadores": "Nº de mobiliário urbano ativo, por instituição",
         "jan": "-", "fev": "-", "mar": "-", "abr": "-", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
-        "acumulado": { "fieam": "-", "sesi": "-", "senai": "-", "iel": "-" }
+        "acumulado": { "fieam": "-", "sesi": "-", "senai": "-", "iel": "-","total geral":"-" }
       }
     ]
     const categorizeIndicator = (indicator: string): string => {
@@ -273,7 +273,7 @@ const Promocoes: React.FC = () => {
       )
     )}
     <TableCell
-      colSpan={4}
+      colSpan={5}
       align="center"
       style={{
         fontWeight: "bold",
@@ -286,7 +286,7 @@ const Promocoes: React.FC = () => {
     </TableCell>
   </TableRow>
   <TableRow>
-    {["FIEAM", "SESI", "SENAI", "IEL"].map((name, index) => (
+    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL GERAL"].map((name, index) => (
       <TableCell
         key={`acumulado-${index}`}
         align="center"
@@ -339,7 +339,7 @@ const Promocoes: React.FC = () => {
   </TableCell>
 ))}
 
-{["fieam", "sesi", "senai", "iel"].map((key) => (
+{["fieam", "sesi", "senai", "iel","total geral"].map((key) => (
   <TableCell align="center" key={key}>
     {row.acumulado[key as keyof typeof row.acumulado] !== undefined
       ? typeof row.acumulado[key as keyof typeof row.acumulado] === "object"
@@ -355,7 +355,7 @@ const Promocoes: React.FC = () => {
           </Table>
         </TableContainer>
       </Paper>
-      <h4>Atualizado até 31/03/2025 atualizado às 9h</h4>
+      <h4>Atualizado até 01/05/2025 atualizado às 9h</h4>
     </div>
   );
 };
