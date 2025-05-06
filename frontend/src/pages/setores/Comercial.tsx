@@ -95,8 +95,8 @@ const data2025 = [
     { "indicadores": "Propostas Ganha - Qtd", "jan": 105, "fev": 125, "mar": "157", "abr": "202", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-", 
       "acumulado": { "fieam": "-", "sesi": 416, "senai": 84, "iel": 89,"total geral":"589" } },
 
-    { "indicadores": "Propostas Ganha - R$", "jan": "R$ 326.100", "fev": "R$ 477.979", "mar": "R$ 769.220", "abr": "R$ 447.307", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-", 
-      "acumulado": { "fieam": "-", "sesi": "R$ 1.474.051", "senai": "R$ 415.410", "iel": "R$ 131.145","total geral":"R$ 2.020.607" } }, 
+    { "indicadores": "Propostas Ganha - R$", "jan": "R$ 326.100", "fev": "R$ 477.979", "mar": "R$ 769.220", "abr": "R$ 1.187.399", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-", 
+      "acumulado": { "fieam": "-", "sesi": "R$ 1.474.051", "senai": "R$ 415.410", "iel": "R$ 131.145","total geral":"R$ 2.760.698" } }, 
   
     { "indicadores": "Pedidos faturados - Qtd", "jan": 118, "fev": 407, "mar": "316", "abr": "452", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-", 
       "acumulado": { "fieam": "-", "sesi": 1.196, "senai": 97, "iel": "-","total geral":"1.293" } }, 
