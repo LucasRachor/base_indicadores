@@ -103,7 +103,7 @@ const Design: React.FC = () => {
     {
       "indicadores": "Tempo médio por ação executada",
       "jan": "4h", "fev": "3h", "mar": "3h", "abr": "3H", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "3h", "sesi": "-", "senai": "-", "iel": "-","total geral":"-" }
+      "acumulado": { "fieam": "3h", "sesi": "-", "senai": "-", "iel": "-","total geral":"3h" }
     }, 
     
     {
@@ -292,7 +292,7 @@ const Design: React.FC = () => {
     </TableCell>
   </TableRow>
   <TableRow>
-    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL GERAL"].map((name, index) => (
+    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL - MÉDIA"].map((name, index) => (
       <TableCell
         key={`acumulado-${index}`}
         align="center"

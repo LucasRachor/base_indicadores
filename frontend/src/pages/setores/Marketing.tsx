@@ -45,7 +45,7 @@ const Marketing: React.FC = () => {
       acumulado: { fieam: "188", sesi: "2.417", senai: "1.091", iel: "717","total geral":"4.413" } },
 
     { indicadores: "Tempo médio por ação executada", jan: "01h01min", fev: "1h06min", mar: "1h", abr: "37min", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-",dez: "-", 
-      acumulado: { fieam: "55min", sesi: "-", senai: "-", iel: "-","total geral":"-" }, },
+      acumulado: { fieam: "55min", sesi: "-", senai: "-", iel: "-","total geral":"55min" }, },
 
     { indicadores: "Campanhas ativas", jan: "13", fev: "13", mar: "15", abr: "12", mai: "-", jun: "-", jul: "-", ago: "-", set: "-", out: "-", nov: "-", dez: "-", 
       acumulado: { fieam: 7, sesi: 15, senai: 18, iel: 13,"total geral":"53" } },
@@ -219,7 +219,7 @@ Tipo
     </TableCell>
   </TableRow>
   <TableRow>
-    {["FIEAM", "SESI", "SENAI", "IEL", "TOTAL GERAL"].map((name, index) => (
+    {["FIEAM", "SESI", "SENAI", "IEL", "TOTAL - MÉDIA"].map((name, index) => (
       <TableCell
         key={`acumulado-${index}`}
         align="center"

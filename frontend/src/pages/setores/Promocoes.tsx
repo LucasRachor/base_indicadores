@@ -101,7 +101,7 @@ const Promocoes: React.FC = () => {
       {
         "indicadores": "Qtd. profissionais ativos no mês",
         "jan": 3, "fev": "3", "mar": "2", "abr": "3", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-","dez": "-",
-        "acumulado": { "fieam": "3", "sesi": "-", "senai": "-", "iel": "-","total geral":"-" }
+        "acumulado": { "fieam": "3", "sesi": "-", "senai": "-", "iel": "-","total geral":"3" }
       },
       {
         "indicadores": "Qtd. de horas trabalhadas no setor",
@@ -286,7 +286,7 @@ const Promocoes: React.FC = () => {
     </TableCell>
   </TableRow>
   <TableRow>
-    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL GERAL"].map((name, index) => (
+    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL - MÉDIA"].map((name, index) => (
       <TableCell
         key={`acumulado-${index}`}
         align="center"

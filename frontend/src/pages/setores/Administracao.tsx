@@ -90,7 +90,7 @@ const Administracao: React.FC = () => {
     {
       "indicadores": "Tempo médio por ação executada",
       "jan": "31min", "fev": "39min", "mar": "1h19min", "abr": "51min", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "50min", "sesi": "-", "senai": "-", "iel": "-","total geral":"-" }
+      "acumulado": { "fieam": "50min", "sesi": "-", "senai": "-", "iel": "-","total geral":"50min" }
     }, 
     {
       "indicadores": "Número de demandas de ajustes de ponto",
@@ -258,7 +258,7 @@ const Administracao: React.FC = () => {
     </TableCell>
   </TableRow>
   <TableRow>
-    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL GERAL"].map((name, index) => (
+    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL - MÉDIA"].map((name, index) => (
       <TableCell
         key={`acumulado-${index}`}
         align="center"

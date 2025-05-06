@@ -346,7 +346,7 @@ const Mercado: React.FC = () => {
     </TableCell>
   </TableRow>
   <TableRow>
-    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL GERAL"].map((name, index) => (
+    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL - MÉDIA"].map((name, index) => (
       <TableCell
         key={`acumulado-${index}`}
         align="center"

@@ -102,7 +102,7 @@ const CallCenter: React.FC = () => {
     {
       "indicadores": "Tempo médio por ação executada",
       "jan": "4 min", "fev": "3 min", "mar": "3 min", "abr": "3 min", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-",
-      "acumulado": { "fieam": "3 min", "sesi": "-", "senai": "-", "iel": "-","total geral":"-" }
+      "acumulado": { "fieam": "3 min", "sesi": "-", "senai": "-", "iel": "-","total geral":"3 min" }
     }, 
       {
         "indicadores": "Atendimentos receptivos Telefone",
@@ -281,7 +281,7 @@ const CallCenter: React.FC = () => {
     </TableCell>
   </TableRow>
   <TableRow>
-    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL GERAL"].map((name, index) => (
+    {["FIEAM", "SESI", "SENAI", "IEL","TOTAL - MÉDIA"].map((name, index) => (
       <TableCell
         key={`acumulado-${index}`}
         align="center"
