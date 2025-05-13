@@ -77,7 +77,7 @@ const data2025 = [
     { "indicadores": "Qtd. horas de trabalhadas no setor", "jan": "1.760", "fev": "1.360", "mar": "1.512", "abr": "1.520", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-", 
       "acumulado": { "fieam": "6.152", "sesi": "-", "senai": "-", "iel": "-","total geral":"6.152" } }, 
 
-    { "indicadores": "Total de ações executadas no mês", "jan": 594, "fev": 923, "mar": "923", "abr": "1.182", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-", 
+    { "indicadores": "Total de ações executadas no mês", "jan": 594, "fev": 923, "mar": "923", "abr": "1.222", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-", 
       "acumulado": { "fieam": "644", "sesi": "2.291", "senai": "400", "iel": "287","total geral":"3.662" } }, 
 
     { "indicadores": "Tempo médio por ação executada", "jan": "2h57min", "fev": "1h28min", "mar": "1h38min", "abr": "1h14min", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-", 
