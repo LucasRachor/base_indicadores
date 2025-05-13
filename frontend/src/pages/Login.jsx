@@ -13,6 +13,8 @@ import maoCobrindo from "../assets/mao_cobrindo.gif";
 import espiandoEntreDedos from "../assets/espiando_entre_dedos.gif";
 import confuso from "../assets/confuso.png";
 import logo2 from "../assets/logo.png";
+import jwt from 'jwt-simple';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -20,6 +22,10 @@ const Login = () => {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [erro, setErro] = useState('');
   const [imagemAtual, setImagemAtual] = useState(neutro);
+
+  //const secret = '10203040'; // igual ao JWT_SECRET no backend
+//const payload = { id: 999, nome: 'Paulo Pereira', perfil: 'Administrador' };
+//const token = jwt.encode(payload, secret)
 
   const emailRef = useRef(null);
   const senhaRef = useRef(null);
@@ -59,8 +65,9 @@ const Login = () => {
     setErro('');
   
     // Login local hardcoded
+
     if (email === 'paulo.pereira@fieam.org.br' && senha === '10203040') {
-      localStorage.setItem('token', 'token_fake_local');
+      localStorage.setItem('token', 'token_fake_dev');
       localStorage.setItem('usuario', JSON.stringify({ nome: 'Paulo Pereira', perfil: 'Administrador' }));
       localStorage.setItem('email', email);
       alert('Login local realizado com sucesso!');

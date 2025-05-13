@@ -142,7 +142,7 @@ const CallCenter: React.FC = () => {
       {
         "indicadores": "Propostas geradas - R$",
         "jan": "R$ 3.473.534", "fev": "R$ 1.087.296", "mar": "R$ 553.135", "abr": "R$ 227.958", "mai": "-", "jun": "-", "jul": "-", "ago": "-", "set": "-", "out": "-", "nov": "-", "dez": "-",
-        "acumulado": { "fieam": "-", "sesi": "R$ 4.100.320", "senai": "R$ 1.186.151", "iel": "R$ 55.451","total geral":"R$ 5.341.922" }
+        "acumulado": { "fieam": "-", "sesi": " R$ 4.254.589", "senai": " R$ 1.419.014", "iel": " R$ 55.450","total geral":" R$ 5.729.055" }
       }
     ]
     const categorizeIndicator = (indicator: string): string => {

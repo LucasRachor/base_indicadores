@@ -20,7 +20,7 @@ const drawerWidth = 240;
 const MotionListItem = motion(Box);
 
 const setores = [
-  { nome: 'Geral', rota: '/setor/Geral' },
+  { nome: 'Diretoria', rota: '/setor/Geral' },
   { nome: 'Comercial', rota: '/setor/Comercial' },
   { nome: 'Call Center', rota: '/setor/CallCenter' },
   { nome: 'Marketing', rota: '/setor/Marketing' },
@@ -104,15 +104,15 @@ const LayoutBase = () => {
           )}
 
           {(isAdmin || isEditor) && (
-            <BotaoMenu to="/itens" icon={<InventoryIcon />} label="Cadastrar Item" location={location} />
+            <BotaoMenu to="/itens" icon={<InventoryIcon />} label="Cadastrar Indicadores" location={location} />
           )}
 
           {(isAdmin || isEditor || isLider) && (
-            <BotaoMenu to="/historico" icon={<HistoryIcon />} label="Histórico de Itens" location={location} />
+            <BotaoMenu to="/historico" icon={<HistoryIcon />} label="Histórico de Indicadores" location={location} />
           )}
 
           {(isAdmin || isEditor) && (
-            <BotaoMenu to="/atualizar" icon={<UpdateIcon />} label="Atualizar Itens" location={location} />
+            <BotaoMenu to="/atualizar" icon={<UpdateIcon />} label="Atualizar Indicadores" location={location} />
           )}
 
           {(isAdmin || isEditor || isLider) && (
@@ -173,7 +173,7 @@ const LayoutBase = () => {
                 }
               }}
             >
-              <Typography variant="h6" fontWeight="bold" align="center">Geral</Typography>
+              <Typography variant="h6" fontWeight="bold" align="center">Diretoria</Typography>
               <Typography variant="body2" color="text.secondary" align="center" mt={1}>
                 Ver Indicadores
               </Typography>

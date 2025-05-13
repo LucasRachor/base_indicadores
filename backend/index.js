@@ -17,6 +17,7 @@ app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
 
 app.use('/api/propostas', propostasRoute);
+
 app.use('/jornada', jornadaRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/usuarios', usuarioRoutes);

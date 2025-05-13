@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Box, Typography, TextField, Button, MenuItem, Grid, Paper, Chip, IconButton, Table, TableHead, TableRow, TableCell, TableBody
 } from '@mui/material';
+import { Tabs, Tab } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import api from '../services/api';
@@ -12,6 +13,7 @@ const CadastroItem = () => {
   const [instituicoes, setInstituicoes] = useState(['FIEAM', 'SESI', 'SENAI', 'IEL']);
   const [novaInstituicao, setNovaInstituicao] = useState('');
   const [editandoId, setEditandoId] = useState(null);
+  const [abaSetor, setAbaSetor] = useState(0);
 
   const [form, setForm] = useState({
     nome: '',
@@ -128,11 +130,11 @@ const CadastroItem = () => {
     <Box p={3}>
       <Paper sx={{ p: 4, mb: 4 }}>
         <Typography variant="h5" mb={2}>
-          {editandoId ? 'Editar Item' : 'Cadastro de Item'}
+          {editandoId ? 'Editar Indicadores' : 'Cadastro de Indicadores'}
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <TextField label="Nome do Item" name="nome" fullWidth value={form.nome} onChange={handleChange} />
+            <TextField label="Nome do Indicador" name="nome" fullWidth value={form.nome} onChange={handleChange} />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField label="Detalhes" name="detalhes" fullWidth value={form.detalhes} onChange={handleChange} />
@@ -185,8 +187,28 @@ const CadastroItem = () => {
 
       {/* Tabela de Itens */}
       <Paper sx={{ p: 2 }}>
-        <Typography variant="h6" gutterBottom>Itens Cadastrados</Typography>
-        <Table>
+  <Typography variant="h6" gutterBottom>Itens Cadastrados</Typography>
+
+  {/* Abas dos Setores */}
+  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    <Tabs
+      value={abaSetor}
+      onChange={(e, newValue) => setAbaSetor(newValue)}
+      variant="scrollable"
+      scrollButtons="auto"
+      aria-label="Abas por setor"
+    >
+      {[...Array(8)].map((_, i) => (
+        <Tab key={i} label={`Setor ${i + 1}`} />
+      ))}
+    </Tabs>
+  </Box>
+
+  {/* Conteúdo de cada aba */}
+  {[...Array(8)].map((_, i) => (
+    <Box key={i} role="tabpanel" hidden={abaSetor !== i} p={2}>
+      {abaSetor === i && (
+        <Table size="small">
           <TableHead>
             <TableRow>
               <TableCell>Nome</TableCell>
@@ -197,21 +219,32 @@ const CadastroItem = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {itens.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.nome}</TableCell>
-                <TableCell>{item.detalhes}</TableCell>
-                <TableCell>{item.setor?.nome || item.setor_nome}</TableCell>
-                <TableCell>{item.ano}</TableCell>
-                <TableCell>
-                  <IconButton color="primary" onClick={() => handleEditar(item)}><EditIcon /></IconButton>
-                  <IconButton color="error" onClick={() => handleExcluir(item.id)}><DeleteIcon /></IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+            {itens
+              .filter((item) =>
+                (item.setor?.nome || item.setor_nome) === `Setor ${i + 1}`
+              )
+              .map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.nome}</TableCell>
+                  <TableCell>{item.detalhes}</TableCell>
+                  <TableCell>{item.setor?.nome || item.setor_nome}</TableCell>
+                  <TableCell>{item.ano}</TableCell>
+                  <TableCell>
+                    <IconButton color="primary" onClick={() => handleEditar(item)}>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton color="error" onClick={() => handleExcluir(item.id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
-      </Paper>
+      )}
+    </Box>
+  ))}
+</Paper>
     </Box>
   );
 };
