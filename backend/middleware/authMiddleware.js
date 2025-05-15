@@ -36,6 +36,12 @@ const autenticar = async (req, res, next) => {
     next();
   } catch (error) {
     console.error('Erro no middleware de autenticação:', error);
+    
+    if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({ erro: 'Sessão expirada. Por favor, faça login novamente.' });
+    }
+
+
     res.status(401).json({ erro: 'Token inválido' });
   }
 };

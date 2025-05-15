@@ -63,13 +63,13 @@ function App() {
           } />
 
           <Route path="/setores" element={
-            <ProtectedRoute perfisPermitidos={['Administrador', 'Usuario_Editor']}>
+            <ProtectedRoute perfisPermitidos={['Administrador']}>
               <SetoresPerfis />
             </ProtectedRoute>
           } />
 
           <Route path="/itens" element={
-            <ProtectedRoute perfisPermitidos={['Administrador', 'Usuario_Editor']}>
+            <ProtectedRoute perfisPermitidos={['Administrador']}>
               <CadastroItem />
             </ProtectedRoute>
           } />
