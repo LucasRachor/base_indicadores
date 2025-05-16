@@ -42,7 +42,7 @@ const cadastrarItem = async (req, res) => {
       data: registrosValorItem,
     }); */
 
-    await prisma.valor_Item.createMany({
+    await prisma.valor_item.createMany({
       data: registrosValorItem,
     });
 

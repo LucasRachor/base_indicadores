@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use('/api/propostas', propostasRoute);
 
-app.use('/jornada', jornadaRoutes);
+app.use('/api/jornadas', jornadaRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/setores', setorRoutes);

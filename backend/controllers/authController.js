@@ -11,6 +11,27 @@ const config = {
 };
 const ad = new ActiveDirectory(config);
 
+const userInfo = async (req, res) => {
+
+  const email = req.email
+
+  const usuario = await prisma.usuario.findUnique({
+    where: {
+      email: email
+    },
+    select: {
+      usuarioSetores: {
+        select: {
+          nome: true
+        }
+      }
+    }
+  })
+
+
+  res.status(200).json(usuario)
+};
+
 // Registro manual (opcional)
 const register = async (req, res) => {
   const { nome, email, senha, perfilId, jornadaTrabalho } = req.body;
@@ -98,7 +119,7 @@ const login = async (req, res) => {
         }
 
         const token = jwt.sign(
-          { id: usuario.id, perfilId: usuario.perfilId },
+          { id: usuario.id, perfilId: usuario.perfilId, name: usuario.email },
           process.env.JWT_SECRET,
           { expiresIn: '1d' }
         );
@@ -194,4 +215,4 @@ const login = async (req, res) => {
   });
 };
 
-module.exports = { login, register, refreshToken };
+module.exports = { login, register, refreshToken, userInfo };

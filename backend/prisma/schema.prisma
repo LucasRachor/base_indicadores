@@ -7,22 +7,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model DiasUteis {
-  id               Int      @id @default(autoincrement())
-  setorId          Int
-  mes              String
-  ano              Int
-  diasUteis        Int
-  colaboradorId    Int
-  horasJornada     DateTime
-  feriasAbonoExtra Float
-  periodo          String
-  usuario          Usuario  @relation(fields: [colaboradorId], references: [id])
-  setor            Setor    @relation(fields: [setorId], references: [id])
+// model DiasUteis {
+//   id               Int      @id @default(autoincrement())
+//   setorId          Int
+//   mes              String
+//   ano              Int
+//   diasUteis        Int
+//   colaboradorId    Int
+//   horasJornada     DateTime
+//   feriasAbonoExtra Float
+//   periodo          String
+//   usuario          Usuario  @relation(fields: [colaboradorId], references: [id])
+//   setor            Setor    @relation(fields: [setorId], references: [id])
 
-  @@index([colaboradorId])
-  @@index([setorId])
-}
+//   @@index([colaboradorId])
+//   @@index([setorId])
+
+//   @@map("dias_uteis")
+// }
 
 model Historico {
   id            Int      @id @default(autoincrement())
@@ -44,15 +46,15 @@ model Historico {
   @@index([itemId])
   @@index([setorId])
   @@index([usuarioId])
+  @@map("historicos")
 }
-
-
-
 
 model Instituicao {
   id      Int          @id @default(autoincrement())
   nome    String       @unique
   valores valor_item[]
+
+  @@map("instituicoes")
 }
 
 model Item {
@@ -65,6 +67,8 @@ model Item {
   valores   valor_item[]
   createdAt DateTime     @default(now())
   Historico Historico[]
+
+  @@map("items")
 }
 
 model Perfil {
@@ -73,6 +77,8 @@ model Perfil {
   detalhes String?
   tipo     String
   usuarios Usuario[]
+
+  @@map("perfis")
 }
 
 model Setor {
@@ -80,11 +86,12 @@ model Setor {
   nome           String         @unique
   descricao      String?
   tipo           String
-  diasUteis      DiasUteis[]
   historicos     Historico[]
   itens          Item[]
   usuarios       Usuario[]
   usuarioSetores UsuarioSetor[]
+
+  @@map("setores")
 }
 
 model Usuario {
@@ -98,13 +105,13 @@ model Usuario {
   setorId         Int?
   perfil          Perfil                 @relation(fields: [perfilId], references: [id])
   setor           Setor?                 @relation(fields: [setorId], references: [id])
-  diasUteis       DiasUteis[]
   historicos      Historico[]
   usuarioSetores  UsuarioSetor[]
   jornadas        JornadaColaboradores[] // <- RELAÇÃO INVERTIDA ADICIONADA
 
   @@index([perfilId])
   @@index([setorId])
+  @@map("usuarios")
 }
 
 model UsuarioSetor {
@@ -115,6 +122,7 @@ model UsuarioSetor {
 
   @@id([usuarioId, setorId])
   @@index([setorId])
+  @@map("usuario_setor")
 }
 
 model valor_item {
@@ -135,10 +143,12 @@ model JornadaColaboradores {
   ano           Int
   mes           Int
   dia           Int
+  setor         String
   valor         String   @default("08:00")
   motivo        String?
   criadoEm      DateTime @default(now())
-  atualizadoEm  DateTime @updatedAt
+  atualizadoEm  DateTime @default(now())
 
   @@unique([colaboradorId, ano, mes, dia])
+  @@map("jornada_colaboradores")
 }
